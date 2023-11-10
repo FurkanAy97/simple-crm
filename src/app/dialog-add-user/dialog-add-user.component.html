@@ -1,0 +1,44 @@
+<h1 mat-dialog-title>Add Username </h1>
+<div mat-dialog-content>
+    <div class="form-name-container">
+        <mat-form-field appearance="outline">
+            <mat-label>First name</mat-label>
+            <input matInput placeholder="Furkan">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Last name</mat-label>
+            <input matInput placeholder="Furkan">
+        </mat-form-field>
+    </div>
+    <div class="form-date-container">
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Birth Date</mat-label>
+            <input matInput [matDatepicker]="picker">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+    </div>
+
+    <div class="form-street-container">
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Street + House No.</mat-label>
+            <input matInput placeholder="Adress">
+        </mat-form-field>
+    </div>
+
+    <div class="form-adress-container">
+        <mat-form-field appearance="outline">
+            <mat-label>ZIP code</mat-label>
+            <input matInput placeholder="ZIP code">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>City</mat-label>
+            <input matInput placeholder="City Name">
+        </mat-form-field>
+    </div>
+
+    <div mat-dialog-actions>
+        <button mat-button>Cancel</button>
+        <button mat-button cdkFocusInitial>Save</button>
+    </div>
+</div>
