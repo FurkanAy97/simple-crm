@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { User } from 'src/models/user.class';
 
 @Component({
   selector: 'app-dialog-add-user',
@@ -7,18 +8,13 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./dialog-add-user.component.scss']
 })
 export class DialogAddUserComponent {
+  
+  user = new User();
+  birthDate: any;
+  
+  saveUser() {
+    this.user.birthDate = this.birthDate.getTime();
+    console.log(this.user);
+  }
 
-
-  today = new Date();
-  month = this.today.getMonth();
-  year = this.today.getFullYear();
-
-  campaignOne = new FormGroup({
-    start: new FormControl(new Date(this.year, this.month, 13)),
-    end: new FormControl(new Date(this.year, this.month, 16)),
-  });
-  campaignTwo = new FormGroup({
-    start: new FormControl(new Date(this.year, this.month, 15)),
-    end: new FormControl(new Date(this.year, this.month, 19)),
-  });
 }

@@ -17,6 +17,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { FormsModule } from '@angular/forms';
+
 
 
 
@@ -29,7 +31,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 @NgModule({
   declarations: [AppComponent, DashboardComponent, UserComponent, DialogAddUserComponent],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, MatToolbarModule, MatIconModule, MatSidenavModule, MatFormFieldModule, MatDatepickerModule,
-    MatButtonModule, MatTooltipModule, MatDialogModule, MatInputModule, MatNativeDateModule],
+    MatButtonModule, MatTooltipModule, MatDialogModule, MatInputModule, MatNativeDateModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })
