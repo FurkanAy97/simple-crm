@@ -9,24 +9,18 @@ import { User } from 'src/models/user.class';
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent {
-  user = new User();
 
   animal: any;
   name: any;
 
 
-  constructor(public dialog: MatDialog) {
-  }
+  constructor(public dialog: MatDialog) {}
 
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogAddUserComponent, {
       data: { name: this.name, animal: this.animal },
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.animal = result;
-    });
   }
 }
 

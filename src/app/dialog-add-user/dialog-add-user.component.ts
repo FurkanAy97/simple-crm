@@ -4,6 +4,7 @@ import { User } from 'src/models/user.class';
 import { AppComponent } from '../app.component';
 import { Firestore, addDoc, setDoc, doc, getDocs, collectionData, collection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class DialogAddUserComponent {
   users$: Observable<any[]>;
   loading: boolean = false
 
-  constructor() {
+  constructor(public dialogRef: MatDialogRef<DialogAddUserComponent>) {
     const userCollection = collection(this.firestore, 'users')
     this.users$ = collectionData(userCollection);
   }
@@ -28,20 +29,12 @@ export class DialogAddUserComponent {
     this.loading = true;
     try {
       this.user.birthDate = this.birthDate.getTime();
-
-      // Assuming this.firestore is your Firestore instance
       const userRef = await addDoc(collection(this.firestore, 'users'), JSON.parse(JSON.stringify(this.user)));
-
-      // Continue your logic here after the user is successfully added
       console.log('User added successfully with ID:', userRef.id);
       this.emptyFields()
-      
-      // Additional logic can be placed here
-
+      this.dialogRef.close()
     } catch (error) {
-      // Handle any errors that occurred during the asynchronous operation
       console.error('Error adding user:', error);
-
     } finally {
       this.loading = false;
     }
