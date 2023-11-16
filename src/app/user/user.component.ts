@@ -23,11 +23,11 @@ export class UserComponent {
       this.allUsers = [];
       querySnapshot.forEach((doc) => {
         let userData = doc.data();
-        console.log(doc.data());
+        userData['id'] = doc.id;
         this.allUsers.push(userData);
+        console.log('userdata', this.allUsers);
       });
       this.timeStampIntoDate()
-      console.log('userdata', this.allUsers);
     });
   }
 

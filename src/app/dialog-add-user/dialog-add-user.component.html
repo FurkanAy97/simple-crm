@@ -11,6 +11,12 @@
             <input [disabled]="loading" [(ngModel)]='user.lastName' matInput placeholder="Furkan">
         </mat-form-field>
     </div>
+    <div class="email-container">
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>E-Mail</mat-label>
+            <input [disabled]="loading" required [(ngModel)]='user.email' matInput type="email" placeholder="email">
+        </mat-form-field>
+    </div>
     <div class="form-date-container">
         <mat-form-field appearance="outline" class="full-width">
             <mat-label>Birth Date</mat-label>
@@ -39,7 +45,7 @@
     </div>
 
     <div mat-dialog-actions>
-        <button [disabled]="loading" mat-button>Cancel</button>
+        <button [disabled]="loading" mat-button (click)="dialogRef.close()">Cancel</button>
         <button [disabled]="loading" mat-button cdkFocusInitial (click)="saveUser()">Save</button>
     </div>
 </div>

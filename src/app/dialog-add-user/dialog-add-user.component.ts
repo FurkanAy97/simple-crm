@@ -39,6 +39,7 @@ export class DialogAddUserComponent {
   emptyFields() {
     this.user.firstName = '';
     this.user.lastName = '';
+    this.user.email = '';
     this.birthDate = '';
     this.user.street = '';
     this.user.zipCode = undefined;
