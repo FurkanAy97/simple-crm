@@ -1,4 +1,28 @@
-<p>user works!</p>
-<button class="user-add-btn" (click)="openDialog()" mat-fab color="primary" aria-label="Example icon button with a delete icon" matTooltip="Add User" matTooltipPosition="above" >
+<mat-card>
+    <mat-card-content>
+        <table class="user-table">
+            <tr >
+                <th>Name</th>
+                <th>Lastname</th>
+                <th>Birthdate</th>
+                <th>Street</th>
+                <th>ZipCode</th>
+                <th>City</th>
+            </tr>
+            <tr *ngFor="let user of allUsers">
+                <td>{{ user.firstName }}</td>
+                <td>{{ user.lastName }}</td>
+                <td>{{ user.birthDate }}</td>
+                <td>{{ user.street }}</td>
+                <td>{{ user.zipCode }}</td>
+                <td>{{ user.city }}</td>
+            </tr>
+
+        </table>
+    </mat-card-content>
+</mat-card>
+
+<button class="user-add-btn" (click)="openDialog()" mat-fab color="primary"
+    aria-label="Example icon button with a delete icon" matTooltip="Add User" matTooltipPosition="above">
     <mat-icon>add</mat-icon>
 </button>

@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddUserComponent } from '../dialog-add-user/dialog-add-user.component';
-import { User } from 'src/models/user.class';
+import { Firestore, collection, onSnapshot } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-user',
@@ -10,18 +10,43 @@ import { User } from 'src/models/user.class';
 })
 export class UserComponent {
 
-  animal: any;
-  name: any;
-
+  firestore: Firestore = inject(Firestore)
+  allUsers: any[] = [];
+  birthDateObj: any;
 
   constructor(public dialog: MatDialog) {}
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(DialogAddUserComponent, {
-      data: { name: this.name, animal: this.animal },
-    });
+  async ngOnInit() {
+    const userCollection = collection(this.firestore, 'users')
 
+    onSnapshot(userCollection, (querySnapshot) => {
+      this.allUsers = [];
+      querySnapshot.forEach((doc) => {
+        let userData = doc.data();
+        console.log(doc.data());
+        this.allUsers.push(userData);
+      });
+      this.timeStampIntoDate()
+      console.log('userdata', this.allUsers);
+    });
+  }
+
+  timeStampIntoDate() {
+    this.allUsers.forEach(user => {
+      let timestamp = user.birthDate;
+      let birthDate = new Date(timestamp);
+      let formattedDate = birthDate.toLocaleDateString('en-GB', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+      });
+      user.birthDate = formattedDate;
+    });
+  }
+
+
+  openDialog(): void {
+    this.dialog.open(DialogAddUserComponent, {});
   }
 }
-
 

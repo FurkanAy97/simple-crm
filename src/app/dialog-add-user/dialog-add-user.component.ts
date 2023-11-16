@@ -1,10 +1,8 @@
 import { Component, inject } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
 import { User } from 'src/models/user.class';
-import { AppComponent } from '../app.component';
-import { Firestore, addDoc, setDoc, doc, getDocs, collectionData, collection } from '@angular/fire/firestore';
+import { Firestore, addDoc, collectionData, collection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 
 
 @Component({
@@ -17,12 +15,10 @@ export class DialogAddUserComponent {
   user = new User();
   birthDate: any;
   firestore: Firestore = inject(Firestore)
-  users$: Observable<any[]>;
   loading: boolean = false
 
   constructor(public dialogRef: MatDialogRef<DialogAddUserComponent>) {
-    const userCollection = collection(this.firestore, 'users')
-    this.users$ = collectionData(userCollection);
+
   }
 
   async saveUser() {
