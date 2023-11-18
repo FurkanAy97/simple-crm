@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddUserComponent } from '../dialog-add-user/dialog-add-user.component';
-import { Firestore, collection, onSnapshot } from '@angular/fire/firestore';
+import { Firestore, collection, getFirestore, onSnapshot } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-user',
@@ -10,7 +10,7 @@ import { Firestore, collection, onSnapshot } from '@angular/fire/firestore';
 })
 export class UserComponent {
 
-  firestore: Firestore = inject(Firestore)
+  firestore = getFirestore();
   allUsers: any[] = [];
   birthDateObj: any;
 
@@ -25,7 +25,6 @@ export class UserComponent {
         let userData = doc.data();
         userData['id'] = doc.id;
         this.allUsers.push(userData);
-        console.log('userdata', this.allUsers);
       });
       this.timeStampIntoDate()
     });
