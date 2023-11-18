@@ -23,6 +23,9 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatCardModule } from '@angular/material/card';
 import { UserDetailComponent } from './user-detail/user-detail.component';
+import {MatMenuModule} from '@angular/material/menu';
+import { DialogEditAddressComponent } from './dialog-edit-address/dialog-edit-address.component';
+import { DialogEditUserComponent } from './dialog-edit-user/dialog-edit-user.component';
 
 
 
@@ -34,9 +37,10 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
 
 
 @NgModule({
-  declarations: [AppComponent, DashboardComponent, UserComponent, DialogAddUserComponent, UserDetailComponent],
+  declarations: [AppComponent, DashboardComponent, UserComponent, DialogAddUserComponent, UserDetailComponent, DialogEditAddressComponent, DialogEditUserComponent],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, MatToolbarModule, MatIconModule, MatSidenavModule, MatFormFieldModule, MatDatepickerModule,
-    MatButtonModule, MatTooltipModule, MatDialogModule, MatInputModule, MatNativeDateModule, MatProgressBarModule, MatCardModule, FormsModule, provideFirebaseApp(() => initializeApp({ "projectId": "simple-crm-be31e", "appId": "1:422824591526:web:9d875653e5134a49d37467", "storageBucket": "simple-crm-be31e.appspot.com", "apiKey": "AIzaSyC1r3CD_-FiHBZc4YPxGIbbpbgdOFhunSs", "authDomain": "simple-crm-be31e.firebaseapp.com", "messagingSenderId": "422824591526" })), provideFirestore(() => getFirestore())],
+    MatButtonModule, MatTooltipModule, MatDialogModule, MatInputModule, MatNativeDateModule, MatProgressBarModule, MatCardModule, FormsModule, MatMenuModule,
+    provideFirebaseApp(() => initializeApp({ "projectId": "simple-crm-be31e", "appId": "1:422824591526:web:9d875653e5134a49d37467", "storageBucket": "simple-crm-be31e.appspot.com", "apiKey": "AIzaSyC1r3CD_-FiHBZc4YPxGIbbpbgdOFhunSs", "authDomain": "simple-crm-be31e.firebaseapp.com", "messagingSenderId": "422824591526" })), provideFirestore(() => getFirestore())],
   providers: [],
   bootstrap: [AppComponent],
 })
