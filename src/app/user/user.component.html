@@ -1,7 +1,7 @@
 <mat-card>
-    <mat-card-content>
+    <mat-card-content *ngIf="allUsers && allUsers.length > 0">
         <table class="user-table">
-            <tr >
+            <tr>
                 <th>Name</th>
                 <th>Lastname</th>
                 <th>E-Mail</th>
@@ -10,7 +10,7 @@
                 <th>ZipCode</th>
                 <th>City</th>
             </tr>
-            <tr *ngFor="let user of allUsers" [routerLink]="['/user/' + user.id]" >
+            <tr *ngFor="let user of allUsers" [routerLink]="['/user/' + user.id]">
                 <td>{{ user.firstName }}</td>
                 <td>{{ user.lastName }}</td>
                 <td>{{ user.email }}</td>
@@ -19,10 +19,13 @@
                 <td>{{ user.zipCode }}</td>
                 <td>{{ user.city }}</td>
             </tr>
-
         </table>
     </mat-card-content>
+    <mat-card-content class="no-users-info" *ngIf="!allUsers || allUsers.length === 0">
+        <h2>No users found.</h2>
+    </mat-card-content>
 </mat-card>
+
 
 <button class="user-add-btn" (click)="openDialog()" mat-fab color="primary"
     aria-label="Example icon button with a delete icon" matTooltip="Add User" matTooltipPosition="above">

@@ -1,1 +1,33 @@
-<p>dialog-edit-user works!</p>
+<mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+<h1 mat-dialog-title>Edit User </h1>
+<div mat-dialog-content class="user-container">
+    <div class="form-name-container">
+        <mat-form-field appearance="outline">
+            <mat-label>First name</mat-label>
+            <input [disabled]="loading" [(ngModel)]='user.firstName' matInput placeholder="Furkan">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Last name</mat-label>
+            <input [disabled]="loading" [(ngModel)]='user.lastName' matInput placeholder="Furkan">
+        </mat-form-field>
+    </div>
+    <div class="email-container">
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>E-Mail</mat-label>
+            <input [disabled]="loading" required [(ngModel)]='user.email' matInput type="email" placeholder="email">
+        </mat-form-field>
+    </div>
+    <div class="form-date-container">
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Birth Date</mat-label>
+            <input [disabled]="loading" [(ngModel)]='birthDate' matInput [matDatepicker]="picker">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+    </div>
+
+    <div mat-dialog-actions>
+        <button [disabled]="loading" mat-button (click)="dialogRef.close()">Cancel</button>
+        <button [disabled]="loading" mat-button cdkFocusInitial (click)="saveUser()">Save</button>
+    </div>
+</div>
