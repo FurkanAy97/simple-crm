@@ -4,23 +4,23 @@
     <div class="form-name-container">
         <mat-form-field appearance="outline">
             <mat-label>First name</mat-label>
-            <input [disabled]="loading" [(ngModel)]='user.firstName' matInput placeholder="Furkan">
+            <input [disabled]="loading" required [(ngModel)]='user.firstName' matInput placeholder="Furkan">
         </mat-form-field>
         <mat-form-field appearance="outline">
             <mat-label>Last name</mat-label>
-            <input [disabled]="loading" [(ngModel)]='user.lastName' matInput placeholder="Furkan">
+            <input [disabled]="loading" required [(ngModel)]='user.lastName' matInput placeholder="Furkan">
         </mat-form-field>
     </div>
     <div class="email-container">
         <mat-form-field appearance="outline" class="full-width">
             <mat-label>E-Mail</mat-label>
-            <input [disabled]="loading" required [(ngModel)]='user.email' matInput type="email" placeholder="email">
+            <input [disabled]="loading" required name="email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}" [(ngModel)]='user.email' matInput type="email" placeholder="email">
         </mat-form-field>
     </div>
     <div class="form-date-container">
         <mat-form-field appearance="outline" class="full-width">
             <mat-label>Birth Date</mat-label>
-            <input [disabled]="loading" [(ngModel)]='birthDate' matInput [matDatepicker]="picker">
+            <input [disabled]="loading" required [(ngModel)]='birthDate' matInput [matDatepicker]="picker">
             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
@@ -29,18 +29,18 @@
     <div class="form-street-container">
         <mat-form-field appearance="outline" class="full-width">
             <mat-label>Street + House No.</mat-label>
-            <input [disabled]="loading" [(ngModel)]='user.street' matInput placeholder="Adress">
+            <input [disabled]="loading" required [(ngModel)]='user.street' matInput placeholder="Adress">
         </mat-form-field>
     </div>
 
     <div class="form-adress-container">
         <mat-form-field appearance="outline">
             <mat-label>ZIP code</mat-label>
-            <input [disabled]="loading" type="number" [(ngModel)]='user.zipCode' matInput placeholder="ZIP code">
+            <input [disabled]="loading" required type="number" [(ngModel)]='user.zipCode' matInput placeholder="ZIP code">
         </mat-form-field>
         <mat-form-field appearance="outline">
             <mat-label>City</mat-label>
-            <input [disabled]="loading" [(ngModel)]='user.city' matInput placeholder="City Name">
+            <input [disabled]="loading" required [(ngModel)]='user.city' matInput placeholder="City Name">
         </mat-form-field>
     </div>
 
