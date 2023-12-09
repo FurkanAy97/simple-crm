@@ -23,9 +23,13 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatCardModule } from '@angular/material/card';
 import { UserDetailComponent } from './user-detail/user-detail.component';
-import {MatMenuModule} from '@angular/material/menu';
+import { MatMenuModule } from '@angular/material/menu';
 import { DialogEditAddressComponent } from './dialog-edit-address/dialog-edit-address.component';
 import { DialogEditUserComponent } from './dialog-edit-user/dialog-edit-user.component';
+import { NgChartsModule } from 'ng2-charts';
+import { SalesChartComponent } from './sales-chart/sales-chart.component';
+import { ProductsComponent } from './products/products.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
 
 
 
@@ -37,9 +41,9 @@ import { DialogEditUserComponent } from './dialog-edit-user/dialog-edit-user.com
 
 
 @NgModule({
-  declarations: [AppComponent, DashboardComponent, UserComponent, DialogAddUserComponent, UserDetailComponent, DialogEditAddressComponent, DialogEditUserComponent],
+  declarations: [AppComponent, DashboardComponent, UserComponent, DialogAddUserComponent, UserDetailComponent, DialogEditAddressComponent, DialogEditUserComponent, SalesChartComponent, ProductsComponent, ProductDetailComponent],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, MatToolbarModule, MatIconModule, MatSidenavModule, MatFormFieldModule, MatDatepickerModule,
-    MatButtonModule, MatTooltipModule, MatDialogModule, MatInputModule, MatNativeDateModule, MatProgressBarModule, MatCardModule, FormsModule, MatMenuModule,
+    MatButtonModule, MatTooltipModule, MatDialogModule, MatInputModule, MatNativeDateModule, MatProgressBarModule, MatCardModule, FormsModule, MatMenuModule, NgChartsModule,
     provideFirebaseApp(() => initializeApp({ "projectId": "simple-crm-be31e", "appId": "1:422824591526:web:9d875653e5134a49d37467", "storageBucket": "simple-crm-be31e.appspot.com", "apiKey": "AIzaSyC1r3CD_-FiHBZc4YPxGIbbpbgdOFhunSs", "authDomain": "simple-crm-be31e.firebaseapp.com", "messagingSenderId": "422824591526" })), provideFirestore(() => getFirestore())],
   providers: [],
   bootstrap: [AppComponent],

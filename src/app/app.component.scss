@@ -2,11 +2,16 @@
     height: 100dvh;
 }
 
-.sidenav {
-    width: 300px;
+.sidenav-content {
     display: flex;
     justify-content: space-between;
     flex-direction: column;
+    height: 90dvh;
+}
+
+
+.sidenav {
+    width: 300px;
 }
 
 .logo-container {
@@ -22,7 +27,8 @@ mat-toolbar {
     height: 56px;
 }
 
-.menu-items {
+.menu-items,
+.sidenav-bottom-content {
     list-style-type: none;
     padding: 0;
     margin: 0;

@@ -1,0 +1,14 @@
+<mat-card>
+    <mat-card-content *ngIf="allProducts && allProducts.length > 0">
+        <table class="products-table">
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+            </tr>
+            <tr *ngFor="let product of allProducts" [routerLink]="['/product/' + product.id]">
+                <td>{{ product.name }}</td>
+                <td>{{ product.price }}€</td>
+            </tr>
+        </table>
+    </mat-card-content>
+</mat-card>

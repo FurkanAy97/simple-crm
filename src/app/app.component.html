@@ -1,16 +1,21 @@
 <mat-drawer-container class="mat-drawer-container" autosize>
     <mat-drawer #drawer class="sidenav" [opened]="true" mode="side">
-        <div class="sidenav-top">
-            <div class="logo-container">
-                <img class="logo-img" src="assets/img/logo.png">
+        <div class="sidenav-content">
+            <div class="sidenav-top">
+                <div class="logo-container">
+                    <img class="logo-img" src="assets/img/logo.png">
+                </div>
+                <ul class="menu-items">
+                    <li routerLink="/"><mat-icon>fact_check</mat-icon>Dashboard</li>
+                    <li routerLink="/user-component"><mat-icon>perm_identity</mat-icon>Customer</li>
+                    <li routerLink="/products-component"><mat-icon>inventory_2</mat-icon>Products</li>
+                </ul>
             </div>
-            <ul class="menu-items">
-                <li routerLink="/"><mat-icon>fact_check</mat-icon> Dashboard</li>
-                <li routerLink="/user-component"><mat-icon>perm_identity</mat-icon> User</li>
-            </ul>
-        </div>
-        <div class="sidenav-bottom">
-            <li routerLink="/user-component"><mat-icon>perm_identity</mat-icon> Logout</li>
+            <div class="sidenav-bottom">
+                <ul class="sidenav-bottom-content">
+                    <li routerLink="/"><mat-icon>logout</mat-icon>Logout</li>
+                </ul>
+            </div>
         </div>
     </mat-drawer>
 
