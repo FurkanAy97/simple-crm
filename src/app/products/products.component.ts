@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ProductService } from 'src/app/product.service';
 
 @Component({
   selector: 'app-products',
@@ -6,20 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent {
-  allProducts: any[] = [{
-    'name': 'Reusable Water Bottles',
-    'price': 11,
-  }, {
-    'name': 'Customizable Phone Cases',
-    'price': 25,
-  },{
-    'name': 'Scented Candles',
-    'price': 17,
-  },{
-    'name': 'Notebook and Pen Sets',
-    'price': 16,
-  },{
-    'name': 'Cooking Utensil Set',
-    'price': 23,
-  }];
+  constructor(private productService: ProductService) {
+  }
+  allProducts: any[] = this.productService.allProducts;
+
+
 }

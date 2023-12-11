@@ -5,7 +5,7 @@
                 <th>Name</th>
                 <th>Price</th>
             </tr>
-            <tr *ngFor="let product of allProducts" [routerLink]="['/product/' + product.id]">
+            <tr *ngFor="let product of allProducts">
                 <td>{{ product.name }}</td>
                 <td>{{ product.price }}€</td>
             </tr>

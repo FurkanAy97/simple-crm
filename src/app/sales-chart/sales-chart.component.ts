@@ -1,47 +1,82 @@
 import { Component } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
+import { ProductService } from '../product.service';
 Chart.register(...registerables);
 
 @Component({
-  selector: 'app-sales-chart',
-  templateUrl: './sales-chart.component.html',
-  styleUrls: ['./sales-chart.component.scss']
+    selector: 'app-sales-chart',
+    templateUrl: './sales-chart.component.html',
+    styleUrls: ['./sales-chart.component.scss']
 })
 export class SalesChartComponent {
+    productNames: any[] = []
+    salesNumbers: any[] = []
 
-  ngOnInit(){
-    let  myChart = new Chart("myChart", {
-      type: 'bar',
-      data: {
-          labels: ['Product 1', 'Product 2', 'Product 3', 'Product 4', 'Product 5'],
-          datasets: [{
-              label: '# of Sales',
-              data: [12, 19, 3, 5, 2],
-              backgroundColor: [
-                  'rgba(255, 99, 132, 1)',
-                  'rgba(54, 162, 235, 1)',
-                  'rgba(255, 206, 86, 1)',
-                  'rgba(75, 192, 192, 1)',
-                  'rgba(153, 102, 255, 1)',
-              ],
-              borderColor: [
-                  'rgba(255, 99, 132, 1)',
-                  'rgba(54, 162, 235, 1)',
-                  'rgba(255, 206, 86, 1)',
-                  'rgba(75, 192, 192, 1)',
-                  'rgba(153, 102, 255, 1)',
-              ],
-              borderWidth: 1
-          }]
-      },
-      options: {
-          scales: {
-              y: {
-                  beginAtZero: true
-              }
-          }
-      }
-  });
-  }
+    constructor(private productService: ProductService) {}
+
+    ngOnInit() {
+        // Access all products
+        const allProducts = this.productService.getProducts();
+
+        // Access sales for a specific product (replace 0 with the desired product ID)
+        for (let i = 0; i < allProducts.length; i++) {
+            const sales = this.productService.getSales(i);
+            this.salesNumbers.push(sales)
+            console.log(this.salesNumbers);
+        }
+        this.getProductNames()
+        let myChart = new Chart("myChart", {
+            type: 'bar',
+            data: {
+                labels: this.productNames,
+                datasets: [{
+                    label: '# of Sales',
+                    data: this.salesNumbers,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        
+    }
+
+
+    getProductNames() {
+        for (let i = 0; i < this.productService.allProducts.length; i++) {
+            const productName = this.productService.allProducts[i]['name'];
+            this.productNames.push(productName);
+        }
+        console.log(this.productNames);
+    }
 
 }
