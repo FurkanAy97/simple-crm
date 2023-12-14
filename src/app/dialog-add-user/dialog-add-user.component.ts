@@ -26,7 +26,6 @@ export class DialogAddUserComponent {
     try {
       this.user.birthDate = this.birthDate.getTime();
       const userRef = await addDoc(collection(this.firestore, 'users'), JSON.parse(JSON.stringify(this.user)));
-      console.log('User added successfully with ID:', userRef.id);
       this.emptyFields()
       this.dialogRef.close()
     } catch (error) {

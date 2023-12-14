@@ -77,4 +77,16 @@ export class ProductService {
     const product = this.allProducts.find(p => p.id === productId);
     return product.sales;
   }
+
+  getBestProduct() {
+    if (this.allProducts.length > 0) {
+      const productWithHighestSales = this.allProducts.reduce((maxSalesProduct, currentProduct) => {
+        return currentProduct.sales > maxSalesProduct.sales ? currentProduct : maxSalesProduct;
+      });
+      console.log("Produkt mit den höchsten Verkaufszahlen:", productWithHighestSales.name);
+      return productWithHighestSales.name
+    } else {
+      console.log("Kein Produkt gefunden.");
+    }
+  }
 }

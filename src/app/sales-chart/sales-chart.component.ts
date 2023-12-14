@@ -15,14 +15,11 @@ export class SalesChartComponent {
     constructor(private productService: ProductService) {}
 
     ngOnInit() {
-        // Access all products
         const allProducts = this.productService.getProducts();
 
-        // Access sales for a specific product (replace 0 with the desired product ID)
         for (let i = 0; i < allProducts.length; i++) {
             const sales = this.productService.getSales(i);
             this.salesNumbers.push(sales)
-            console.log(this.salesNumbers);
         }
         this.getProductNames()
         let myChart = new Chart("myChart", {
@@ -67,7 +64,7 @@ export class SalesChartComponent {
                 }
             }
         });
-        
+
     }
 
 
@@ -76,7 +73,6 @@ export class SalesChartComponent {
             const productName = this.productService.allProducts[i]['name'];
             this.productNames.push(productName);
         }
-        console.log(this.productNames);
     }
 
 }

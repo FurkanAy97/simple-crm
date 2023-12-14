@@ -1,0 +1,25 @@
+.divSales {
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 50%;
+    height: 20dvh;
+    max-height: 260px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+}
+
+.topProduct{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1{
+    font-weight: bold;
+}

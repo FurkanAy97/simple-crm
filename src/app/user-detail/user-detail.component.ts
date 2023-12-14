@@ -24,14 +24,12 @@ export class UserDetailComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe(paramMap => {
       this.userId = paramMap.get('id');
-      console.log(this.userId);
     });
     this.getUser()
   }
 
   getUser() {
     onSnapshot(doc(this.firestore, "users", this.userId), (doc) => {
-      console.log("Current data: ", doc.data());
       if (doc.data()) {
         let userData = doc.data();
         this.user = userData as User;
