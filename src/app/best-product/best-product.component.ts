@@ -7,14 +7,14 @@ import { ProductService } from '../product.service';
   styleUrls: ['./best-product.component.scss']
 })
 export class BestProductComponent {
-  topProduct: any;
+  topProduct: string;
+  totalRevenue: number;
 
   constructor(private productService: ProductService) {}
 
   ngOnInit() {
     this.topProduct = this.productService.getBestProduct();
+    this.totalRevenue = this.productService.getRevenue()
     console.log(this.topProduct);
   }
-
-
 }

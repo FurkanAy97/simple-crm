@@ -89,4 +89,15 @@ export class ProductService {
       console.log("Kein Produkt gefunden.");
     }
   }
+
+  getRevenue() {
+    // Using the reduce function to sum up the sales numbers
+    const totalRevenue = this.allProducts.reduce((sum, product) => {
+      return sum + product.sales;
+    }, 0);
+
+    console.log("Gesamtumsatz:", totalRevenue);
+    return totalRevenue;
+
+  }
 }
