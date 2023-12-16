@@ -4,11 +4,11 @@
 
     tr {
         border-bottom: 1px solid rgba(0, 0, 0, 0.4);
-        
 
         &:first-child {
             cursor: unset;
-            &:hover{
+
+            &:hover {
                 background-color: unset;
             }
         }
@@ -16,7 +16,6 @@
         &:last-child {
             border-bottom: 0;
         }
-
 
         td {
             height: 48px;
@@ -27,19 +26,20 @@
         }
 
         th {
-
             &:first-child {
                 padding-left: 16px;
             }
         }
 
-        
-        &:hover{
-            background-color: rgba(0, 0, 0, 0.04);
+        &:nth-child(even) {
+            background-color: rgba(0, 0, 0, 0.08); /* Change the color as needed */
+            overflow-x: visible;
         }
 
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.04);
+        }
     }
-
 
     th {
         color: rgba(0, 0, 0, 0.5);
