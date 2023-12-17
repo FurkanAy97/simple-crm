@@ -30,6 +30,7 @@ import { NgChartsModule } from 'ng2-charts';
 import { SalesChartComponent } from './sales-chart/sales-chart.component';
 import { ProductsComponent } from './products/products.component';
 import { BestProductComponent } from './best-product/best-product.component';
+import { LoginComponent } from './login/login.component';
 
 
 
@@ -41,7 +42,7 @@ import { BestProductComponent } from './best-product/best-product.component';
 
 
 @NgModule({
-  declarations: [AppComponent, DashboardComponent, UserComponent, DialogAddUserComponent, UserDetailComponent, DialogEditAddressComponent, DialogEditUserComponent, SalesChartComponent, ProductsComponent, BestProductComponent],
+  declarations: [AppComponent, DashboardComponent, UserComponent, DialogAddUserComponent, UserDetailComponent, DialogEditAddressComponent, DialogEditUserComponent, SalesChartComponent, ProductsComponent, BestProductComponent, LoginComponent],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, MatToolbarModule, MatIconModule, MatSidenavModule, MatFormFieldModule, MatDatepickerModule,
     MatButtonModule, MatTooltipModule, MatDialogModule, MatInputModule, MatNativeDateModule, MatProgressBarModule, MatCardModule, FormsModule, MatMenuModule, NgChartsModule,
     provideFirebaseApp(() => initializeApp({ "projectId": "simple-crm-be31e", "appId": "1:422824591526:web:9d875653e5134a49d37467", "storageBucket": "simple-crm-be31e.appspot.com", "apiKey": "AIzaSyC1r3CD_-FiHBZc4YPxGIbbpbgdOFhunSs", "authDomain": "simple-crm-be31e.firebaseapp.com", "messagingSenderId": "422824591526" })), provideFirestore(() => getFirestore())],
