@@ -1,1 +1,36 @@
-<p>login works!</p>
+<div class="login-container">
+    <mat-card class="login-card">
+        <mat-card-content>
+            <form (ngSubmit)="onSubmit()" #form="ngForm" autocomplete="new-password" class="form">
+                <h1>Login</h1>
+                <!-- <div class="form-control">
+                    <label for="email">Email</label>
+                    <input id="email" type="email" autocomplete="new-password">
+                </div> -->
+                <p>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Email</mat-label>
+                        <input matInput placeholder="Email" type="email">
+                        <mat-icon matSuffix>email</mat-icon>
+                    </mat-form-field>
+                </p>
+
+                <p>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Password</mat-label>
+                        <input matInput placeholder="Password" type="password">
+                        <mat-icon matSuffix>password</mat-icon>
+                    </mat-form-field>
+                </p>
+
+                <section>
+                    <div class="btn-section">
+                        <button type="submit" [disabled]="!form.form.valid" mat-raised-button
+                            color="primary">Login</button>
+                        <button type="submit" mat-raised-button color="basic" routerLink="/dashboard">Guest-Login</button>
+                    </div>
+                </section>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

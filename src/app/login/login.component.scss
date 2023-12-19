@@ -1,0 +1,37 @@
+.login-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100dvh;
+}
+
+.login-card{
+    width: 300px;
+}
+
+.form{
+    max-width: 400px;
+    max-height: 300px;
+    padding: 32px;
+
+    p{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    h1{
+        text-align: center;
+    }
+}
+
+mat-card-content{
+    height: 100%;
+    padding: 0;
+}
+
+.btn-section{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
