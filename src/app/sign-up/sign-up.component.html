@@ -1,0 +1,49 @@
+<div class="signup-container">
+    <mat-card class="signup-card">
+      <mat-card-content>
+        <h2>Sign Up</h2>
+        <form (ngSubmit)="onSubmit()" #form="ngForm" autocomplete="off" class="form signup-form">
+          <div class="form-group">
+            <mat-form-field appearance="outline">
+              <mat-label>First Name</mat-label>
+              <input matInput placeholder="First Name" type="text" ngModel name="firstName" required>
+            </mat-form-field>
+          </div>
+  
+          <div class="form-group">
+            <mat-form-field appearance="outline">
+              <mat-label>Last Name</mat-label>
+              <input matInput placeholder="Last Name" type="text" ngModel name="lastName" required>
+            </mat-form-field>
+          </div>
+  
+          <div class="form-group">
+            <mat-form-field appearance="outline">
+              <mat-label>Email</mat-label>
+              <input matInput placeholder="Email" type="email" ngModel name="email" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}">
+            </mat-form-field>
+          </div>
+  
+          <div class="form-group">
+            <mat-form-field appearance="outline">
+              <mat-label>Password</mat-label>
+              <input matInput placeholder="Password" type="password" ngModel name="password" required>
+            </mat-form-field>
+          </div>
+  
+          <button type="submit" [disabled]="!form.form.valid" mat-raised-button color="primary">Sign Up</button>
+        </form>
+  
+        <!-- Add a link to the login page -->
+        <div class="login-link">
+          Already have an account? <a routerLink="/login">Login</a>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  
+    <button class="user-add-btn" (click)="openDialog()" mat-fab color="primary"
+      aria-label="Example icon button with a delete icon" matTooltip="Add User" matTooltipPosition="above">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+  

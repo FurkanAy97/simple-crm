@@ -3,10 +3,7 @@
         <mat-card-content>
             <form (ngSubmit)="onSubmit()" #form="ngForm" autocomplete="new-password" class="form">
                 <h1>Login</h1>
-                <!-- <div class="form-control">
-                    <label for="email">Email</label>
-                    <input id="email" type="email" autocomplete="new-password">
-                </div> -->
+
                 <p>
                     <mat-form-field appearance="outline">
                         <mat-label>Email</mat-label>
@@ -25,12 +22,16 @@
 
                 <section>
                     <div class="btn-section">
-                        <button type="submit" [disabled]="!form.form.valid" mat-raised-button
-                            color="primary">Login</button>
+                        <button type="submit" [disabled]="!form.form.valid" mat-raised-button color="primary">Login</button>
                         <button type="submit" mat-raised-button color="basic" routerLink="/dashboard">Guest-Login</button>
                     </div>
                 </section>
             </form>
+
+            <!-- Add a link to the signup page -->
+            <div class="signup-link">
+                Don't have an account? <a routerLink="/signup">Sign up</a>
+            </div>
         </mat-card-content>
     </mat-card>
 </div>

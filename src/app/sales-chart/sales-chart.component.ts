@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
-import { ProductService } from '../product.service';
+import { ProductService } from '../../services/product.service';
 Chart.register(...registerables);
 
 @Component({

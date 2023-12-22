@@ -1,37 +1,57 @@
-.login-container{
+.login-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100dvh;
 }
 
-.login-card{
+.login-card {
     width: 300px;
 }
 
-.form{
+.form {
     max-width: 400px;
     max-height: 300px;
     padding: 32px;
 
-    p{
+    p {
         display: flex;
         justify-content: center;
         align-items: center;
     }
 
-    h1{
+    h1 {
         text-align: center;
     }
 }
 
-mat-card-content{
+mat-card-content {
     height: 100%;
     padding: 0;
 }
 
-.btn-section{
+.btn-section {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+}
+
+.signup-link {
+    text-align: center;
+}
+
+.signup-link a {
+    color: #1976D2;
+    /* Use a color that matches your theme */
+    text-decoration: underline;
+    /* Underline the link */
+    cursor: pointer;
+    /* Show pointer cursor on hover */
+    font-weight: bold;
+    /* Make the link text bold */
+}
+
+.signup-link a:hover {
+    color: #1565C0;
+    /* Change color on hover */
 }

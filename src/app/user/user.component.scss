@@ -48,7 +48,15 @@ mat-card-content {
         &:hover{
             background-color: rgba(0, 0, 0, 0.04);
         }
+        
+        &:nth-child(even) {
+            background-color: rgba(0, 0, 0, 0.08); /* Change the color as needed */
+            overflow-x: visible;
+        }
 
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.04);
+        }
     }
 
 
