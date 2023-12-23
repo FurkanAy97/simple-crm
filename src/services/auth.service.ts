@@ -13,15 +13,11 @@ export class AuthService {
     this.auth = getAuth(firebaseApp);
   }
 
-  async signUpWithEmailAndPassword(email: string, password: string, displayName?: string, photoURL?: string): Promise<User> {
+  async signUpWithEmailAndPassword(email: string, password: string): Promise<User> {
     try {
       const userCredential = await createUserWithEmailAndPassword(this.auth, email, password);
       const user = userCredential.user;
-
-      // Update user profile if displayName and/or photoURL are provided
-      if (displayName || photoURL) {
-        await updateProfile(user, { displayName, photoURL });
-      }
+      console.log(user);
       return user;
     } catch (error) {
       // Handle errors

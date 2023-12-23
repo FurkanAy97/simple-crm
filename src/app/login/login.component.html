@@ -7,28 +7,27 @@
                 <p>
                     <mat-form-field appearance="outline">
                         <mat-label>Email</mat-label>
-                        <input matInput placeholder="Email" type="email">
+                        <input matInput ngModel name="email" placeholder="Email" required type="email" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$">
                         <mat-icon matSuffix>email</mat-icon>
                     </mat-form-field>
-                </p>
+                </p>                
 
                 <p>
                     <mat-form-field appearance="outline">
                         <mat-label>Password</mat-label>
-                        <input matInput placeholder="Password" type="password">
+                        <input matInput ngModel name="password" placeholder="Password" required type="password">
                         <mat-icon matSuffix>password</mat-icon>
                     </mat-form-field>
                 </p>
 
                 <section>
                     <div class="btn-section">
-                        <button type="submit" [disabled]="!form.form.valid" mat-raised-button color="primary">Login</button>
+                        <button type="submit" [disabled]="!form.valid" mat-raised-button color="primary">Login</button>
                         <button type="submit" mat-raised-button color="basic" routerLink="/dashboard">Guest-Login</button>
                     </div>
                 </section>
             </form>
 
-            <!-- Add a link to the signup page -->
             <div class="signup-link">
                 Don't have an account? <a routerLink="/signup">Sign up</a>
             </div>
