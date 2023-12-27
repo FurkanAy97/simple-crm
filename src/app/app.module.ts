@@ -33,6 +33,8 @@ import { BestProductComponent } from './best-product/best-product.component';
 import { LoginComponent } from './login/login.component';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 
 
 
@@ -55,6 +57,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     MatFormFieldModule,
     MatDatepickerModule,
     MatButtonModule,
+    MatSnackBarModule,
     MatTooltipModule,
     MatDialogModule,
     MatInputModule,

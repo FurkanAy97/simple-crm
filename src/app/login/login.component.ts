@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms'; // Import FormsModule
-import { initializeApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
+import { AuthService } from 'src/services/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,9 +9,36 @@ import { getFirestore } from 'firebase/firestore';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  onSubmit() {
-    throw new Error('Method not implemented.');
+  email: string = '';
+  password: string = '';
+
+  constructor(private authService: AuthService, private snackBar: MatSnackBar, private router: Router) {}
+
+  async onSubmit() {
+    try {
+      await this.authService.loginWithEmailAndPassword(this.email, this.password).then(() => {
+        this.snackBar.open('You have successfully logged in.', 'Close', {
+          duration: 3000,
+        });
+        this.router.navigate(['/dashboard']);
+      })
+    } catch (error) {
+      if (error.code === 'auth/invalid-credential') {
+        this.snackBar.open('Invalid email or password. Please try again.', 'Close', {
+          duration: 3000,
+        });
+      } else {
+        this.snackBar.open('An error occurred. Please try again later.', 'Close', {
+          duration: 3000,
+        });
+      }
+    }
   }
 
-  firestore = getFirestore();
+  handleGuestLogin(){
+    this.authService.guestLogin()
+    this.snackBar.open('You have successfully logged in as a Guest.', 'Close', {
+      duration: 3000,
+    });
+  }
 }

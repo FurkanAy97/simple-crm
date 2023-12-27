@@ -1,6 +1,6 @@
-<mat-drawer-container class="mat-drawer-container" autosize>
-    <mat-drawer #drawer class="sidenav" [opened]="true" mode="side">
-        <div class="sidenav-content">
+<mat-drawer-container class="mat-drawer-container" autosize authService.isAuthenticated>
+    <mat-drawer #drawer class="sidenav" [opened]="authService.isAuthenticated" mode="side">
+        <div class="sidenav-content" *ngIf="authService.isAuthenticated">
             <div class="sidenav-top">
                 <div class="logo-container">
                     <img class="logo-img" src="assets/img/logo.png">
@@ -13,14 +13,15 @@
             </div>
             <div class="sidenav-bottom">
                 <ul class="sidenav-bottom-content">
-                     <li routerLink="/"><mat-icon>logout</mat-icon>Logout</li> 
+                    <li (click)="logout()"><mat-icon>logout</mat-icon>Logout</li>
                 </ul>
+
             </div>
         </div>
     </mat-drawer>
 
     <div class="example-sidenav-content">
-        <mat-toolbar color="primary">
+        <mat-toolbar color="primary" *ngIf="authService.isAuthenticated">
             <button (click)="drawer.toggle()" mat-icon-button class="example-icon"
                 aria-label="Example icon-button with menu icon">
                 <mat-icon>menu</mat-icon>

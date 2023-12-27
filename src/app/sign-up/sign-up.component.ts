@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from 'src/services/auth.service';
 import { trigger, state, style, animate, transition } from '@angular/animations';
-import { timeout } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-sign-up',
@@ -25,23 +25,21 @@ export class SignUpComponent {
   passwordError: string | null = null;
   isPasswordTooShort: boolean = false;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private snackBar: MatSnackBar) {}
 
   signUp() {
-    this.authService.signUpWithEmailAndPassword(this.email, this.password)
-      .then((user) => {
-        console.log('User signed up:', user);
-      })
-      .catch((error) => {
-        if (error.code === 'auth/weak-password') {
-          this.isPasswordTooShort = true
-          setTimeout(() => {
-            this.isPasswordTooShort = false
-
-          }, 4000);
-        }
+    if (this.password.length > 5) {
+      this.authService.signUpWithEmailAndPassword(this.email, this.password, this.firstName, this.lastName)
+        .then((user) => {
+          console.log('User signed up:', user);
+          this.snackBar.open('You have successfully signed up.', 'Close', {
+            duration: 3000, // 3 seconds
+          });
+        })
+    } else {
+      this.snackBar.open('Password should be at least 6 characters', 'Close', {
+        duration: 4000, // 3 seconds
       });
+    }
   }
-
-
 }
