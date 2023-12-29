@@ -2,14 +2,16 @@ import { Inject, Injectable } from '@angular/core';
 import { FirebaseApp } from '@angular/fire/app';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, User } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { Auth } from 'firebase/auth';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private auth;
+  private auth: Auth;
   private isLoggedIn = false;
   private isLoggedInAsGuest = false;
+  public newCreatedEmail: string = ''
 
   constructor(@Inject(FirebaseApp) private firebaseApp: FirebaseApp, private router: Router) {
     this.auth = getAuth(this.firebaseApp);
@@ -26,8 +28,8 @@ export class AuthService {
       await updateProfile(user, {
         displayName: `${firstName} ${lastName}`
       });
-      this.isLoggedIn = true;
-      console.log(user);
+      this.newCreatedEmail = user.email
+      this.router.navigate(['/']);
       return user;
     } catch (error) {
       const errorCode = error.code;
@@ -47,7 +49,6 @@ export class AuthService {
     } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
-      console.error("Error logging in:", errorCode, errorMessage);
       throw error;
     }
   }

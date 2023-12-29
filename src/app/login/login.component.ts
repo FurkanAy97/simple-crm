@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -8,11 +8,18 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   email: string = '';
   password: string = '';
 
   constructor(private authService: AuthService, private snackBar: MatSnackBar, private router: Router) {}
+
+  ngOnInit() {
+    // Check if newCreatedEmail is available and update the email field
+    if (this.authService.newCreatedEmail) {
+      this.email = this.authService.newCreatedEmail;
+    }
+  }
 
   async onSubmit() {
     try {
