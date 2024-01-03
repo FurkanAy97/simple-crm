@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ProductService {
-  allProducts: any[] = [
+  allExampleProducts: any[] = [
     {
       'name': 'Reusable Water Bottles',
       'price': 11,
@@ -67,6 +67,12 @@ export class ProductService {
       'sales': 600
     }
   ];
+
+  constructor(){
+    this.allProducts = this.allExampleProducts
+  }
+
+  allProducts: any[];
 
   getProducts() {
     return this.allProducts;

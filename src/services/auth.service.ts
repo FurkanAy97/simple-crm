@@ -1,40 +1,65 @@
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { FirebaseApp } from '@angular/fire/app';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, User } from '@angular/fire/auth';
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+  User,
+} from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { Auth } from 'firebase/auth';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   private auth: Auth;
   private isLoggedIn = false;
   private isLoggedInAsGuest = false;
-  public newCreatedEmail: string = ''
+  public newCreatedEmail: string = '';
 
-  constructor(@Inject(FirebaseApp) private firebaseApp: FirebaseApp, private router: Router) {
+  constructor(private firebaseApp: FirebaseApp, private router: Router) {
     this.auth = getAuth(this.firebaseApp);
+    this.loadAuthState();
   }
 
   get isAuthenticated(): boolean {
     return this.isLoggedIn;
   }
 
-  async signUpWithEmailAndPassword(email: string, password: string, firstName: string, lastName: string): Promise<User> {
+  private loadAuthState() {
+    const storedAuthState = localStorage.getItem('isLoggedIn');
+    if (storedAuthState) {
+      this.isLoggedIn = JSON.parse(storedAuthState);
+    }
+  }
+
+  private saveAuthState() {
+    localStorage.setItem('isLoggedIn', JSON.stringify(this.isLoggedIn));
+  }
+
+  async signUpWithEmailAndPassword(
+    email: string,
+    password: string,
+    firstName: string,
+    lastName: string
+  ): Promise<User> {
     try {
       const userCredential = await createUserWithEmailAndPassword(this.auth, email, password);
       const user = userCredential.user;
       await updateProfile(user, {
-        displayName: `${firstName} ${lastName}`
+        displayName: `${firstName} ${lastName}`,
       });
-      this.newCreatedEmail = user.email
+      this.newCreatedEmail = user.email;
+      this.isLoggedIn = true;
+      this.saveAuthState(); // Save the authentication state
       this.router.navigate(['/']);
       return user;
     } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
-      console.error("Error signing up:", errorCode, errorMessage);
+      console.error('Error signing up:', errorCode, errorMessage);
       throw error;
     }
   }
@@ -44,6 +69,7 @@ export class AuthService {
       const userCredential = await signInWithEmailAndPassword(this.auth, email, password);
       const user = userCredential.user;
       this.isLoggedIn = true;
+      this.saveAuthState(); // Save the authentication state
       console.log('Logged in user:', user);
       return user;
     } catch (error) {
@@ -56,11 +82,13 @@ export class AuthService {
   public guestLogin() {
     this.isLoggedIn = true;
     this.isLoggedInAsGuest = true;
+    this.saveAuthState(); // Save the authentication state
   }
 
   public logout(): void {
     this.isLoggedIn = false;
     this.isLoggedInAsGuest = false;
+    this.saveAuthState(); // Save the authentication state
     this.router.navigate(['/']);
   }
 }

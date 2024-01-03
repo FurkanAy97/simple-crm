@@ -34,6 +34,7 @@ import { LoginComponent } from './login/login.component';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { DialogAddProductComponent } from './dialog-add-product/dialog-add-product.component';
 
 
 
@@ -46,7 +47,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @NgModule({
-  declarations: [AppComponent, DashboardComponent, UserComponent, DialogAddUserComponent, UserDetailComponent, DialogEditAddressComponent, DialogEditUserComponent, SalesChartComponent, ProductsComponent, BestProductComponent, LoginComponent, SignUpComponent],
+  declarations: [AppComponent, DashboardComponent, UserComponent, DialogAddUserComponent, UserDetailComponent, DialogEditAddressComponent, DialogEditUserComponent, SalesChartComponent, ProductsComponent, BestProductComponent, LoginComponent, SignUpComponent, DialogAddProductComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
