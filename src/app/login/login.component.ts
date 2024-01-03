@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { ProductService } from 'src/services/product.service';
 
 @Component({
   selector: 'app-login',
@@ -11,8 +12,9 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   email: string = '';
   password: string = '';
+  isKnown: boolean = false;
 
-  constructor(private authService: AuthService, private snackBar: MatSnackBar, private router: Router) {}
+  constructor(private authService: AuthService, private snackBar: MatSnackBar, private router: Router, private productService: ProductService) {}
 
   ngOnInit() {
     // Check if newCreatedEmail is available and update the email field
@@ -22,6 +24,7 @@ export class LoginComponent implements OnInit {
   }
 
   async onSubmit() {
+    this.productService.checkIfKnownUser();
     try {
       await this.authService.loginWithEmailAndPassword(this.email, this.password).then(() => {
         this.snackBar.open('You have successfully logged in.', 'Close', {
@@ -42,10 +45,18 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  handleGuestLogin(){
+  handleGuestLogin() {
+    this.productService.checkIfKnownUser();
     this.authService.guestLogin()
     this.snackBar.open('You have successfully logged in as a Guest.', 'Close', {
       duration: 3000,
     });
   }
+
+
+
+  
 }
+
+
+

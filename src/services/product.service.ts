@@ -1,5 +1,8 @@
-// product.service.ts
 import { Injectable } from '@angular/core';
+import { initializeApp } from 'firebase/app';
+import { getFirestore, collection, setDoc, doc, getDocs, deleteDoc } from 'firebase/firestore';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -68,11 +71,44 @@ export class ProductService {
     }
   ];
 
-  constructor(){
-    this.allProducts = this.allExampleProducts
+  allProducts: any[];
+  isKnown: any;
+
+  constructor() {
+    this.checkIfKnownUser()
   }
 
-  allProducts: any[];
+  async uploadExampleProductsToFirebase() {
+    const db = getFirestore();
+
+    try {
+      const productsCollection = collection(db, 'products');
+
+      // Clear existing data in the collection
+      await this.clearCollection(db, productsCollection);
+
+
+      // Upload example products to Firebase
+      for (const product of this.allExampleProducts) {
+        await setDoc(doc(productsCollection, product.id.toString()), product);
+      }
+
+      console.log('Example products uploaded to Firebase.');
+    } catch (error) {
+      console.error('Error uploading example products to Firebase:', error);
+    }
+  }
+
+  async clearCollection(db: any, collectionRef: any) {
+    const querySnapshot = await getDocs(collectionRef);
+
+    querySnapshot.forEach((doc) => {
+      deleteDoc(doc.ref);
+    });
+
+    console.log('Collection cleared.');
+  }
+
 
   getProducts() {
     return this.allProducts;
@@ -105,5 +141,27 @@ export class ProductService {
     console.log("Gesamtumsatz:", totalRevenue);
     return totalRevenue;
 
+  }
+
+  checkIfKnownUser() {
+    this.loadKnownState(); // Add parentheses to call the method
+    if (!this.isKnown) {
+      this.allProducts = this.allExampleProducts;
+    } else {
+      this.saveKnownState();
+    }
+  }
+
+  private loadKnownState() {
+    const storedKnownState = localStorage.getItem('isKnown');
+    if (storedKnownState) {
+      this.isKnown = true;
+    } else {
+      this.isKnown = false;
+    }
+  }
+
+  private saveKnownState() {
+    localStorage.setItem('isKnown', 'true');
   }
 }

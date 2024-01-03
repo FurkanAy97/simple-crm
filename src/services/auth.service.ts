@@ -53,7 +53,7 @@ export class AuthService {
       });
       this.newCreatedEmail = user.email;
       this.isLoggedIn = true;
-      this.saveAuthState(); // Save the authentication state
+      this.saveAuthState(); 
       this.router.navigate(['/']);
       return user;
     } catch (error) {
@@ -69,7 +69,7 @@ export class AuthService {
       const userCredential = await signInWithEmailAndPassword(this.auth, email, password);
       const user = userCredential.user;
       this.isLoggedIn = true;
-      this.saveAuthState(); // Save the authentication state
+      this.saveAuthState();
       console.log('Logged in user:', user);
       return user;
     } catch (error) {
@@ -82,13 +82,13 @@ export class AuthService {
   public guestLogin() {
     this.isLoggedIn = true;
     this.isLoggedInAsGuest = true;
-    this.saveAuthState(); // Save the authentication state
+    this.saveAuthState();
   }
 
   public logout(): void {
     this.isLoggedIn = false;
     this.isLoggedInAsGuest = false;
-    this.saveAuthState(); // Save the authentication state
+    this.saveAuthState();
     this.router.navigate(['/']);
   }
 }
