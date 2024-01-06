@@ -33,3 +33,7 @@
         </div>
     </div>
 </mat-drawer-container>
+
+<div *ngIf="productService.loading" class="overlay">
+    <mat-spinner diameter="100"></mat-spinner>
+</div>

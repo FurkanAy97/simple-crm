@@ -35,6 +35,7 @@ import { getAuth, provideAuth } from '@angular/fire/auth';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { DialogAddProductComponent } from './dialog-add-product/dialog-add-product.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 
@@ -67,6 +68,7 @@ import { DialogAddProductComponent } from './dialog-add-product/dialog-add-produ
     MatCardModule,
     FormsModule,
     MatMenuModule,
+    MatProgressSpinnerModule,
     NgChartsModule,
     // Remove the duplicate provideFirebaseApp instance
     provideFirebaseApp(() => initializeApp({

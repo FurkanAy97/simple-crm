@@ -17,7 +17,6 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthService, private snackBar: MatSnackBar, private router: Router, private productService: ProductService) {}
 
   ngOnInit() {
-    // Check if newCreatedEmail is available and update the email field
     if (this.authService.newCreatedEmail) {
       this.email = this.authService.newCreatedEmail;
     }
@@ -31,6 +30,8 @@ export class LoginComponent implements OnInit {
           duration: 3000,
         });
         this.router.navigate(['/dashboard']);
+        this.productService.saveKnownState()
+        this.productService.checkIfKnownUser()
       })
     } catch (error) {
       if (error.code === 'auth/invalid-credential') {
@@ -51,6 +52,7 @@ export class LoginComponent implements OnInit {
     this.snackBar.open('You have successfully logged in as a Guest.', 'Close', {
       duration: 3000,
     });
+    this.productService.saveKnownState()
   }
 
 

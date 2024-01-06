@@ -9,19 +9,23 @@ Chart.register(...registerables);
     styleUrls: ['./sales-chart.component.scss']
 })
 export class SalesChartComponent {
-    productNames: any[] = []
-    salesNumbers: any[] = []
+    productNames: any[] = [];
+    salesNumbers: any[] = [];
 
     constructor(private productService: ProductService) {}
 
-    ngOnInit() {
+    async ngOnInit() {
+        await this.productService.downloadProducts(); // Wait for products to be downloaded
+
         const allProducts = this.productService.getProducts();
 
         for (let i = 0; i < allProducts.length; i++) {
             const sales = this.productService.getSales(i);
-            this.salesNumbers.push(sales)
+            this.salesNumbers.push(sales);
         }
-        this.getProductNames()
+
+        this.getProductNames();
+
         let myChart = new Chart("myChart", {
             type: 'bar',
             data: {
@@ -64,9 +68,7 @@ export class SalesChartComponent {
                 }
             }
         });
-
     }
-
 
     getProductNames() {
         for (let i = 0; i < this.productService.allProducts.length; i++) {
@@ -74,5 +76,4 @@ export class SalesChartComponent {
             this.productNames.push(productName);
         }
     }
-
 }

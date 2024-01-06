@@ -13,7 +13,7 @@ import { ProductService } from 'src/services/product.service';
 export class DialogAddProductComponent {
   loading: boolean = false;
   productname: string = '';
-  productPrice: number = 0;  // Add other product details as needed
+  productPrice: number = 0;
 
   firestore = getFirestore();
   product: any;
@@ -27,26 +27,21 @@ export class DialogAddProductComponent {
     try {
       this.loading = true;
 
-      // Create a new product object
       const newProduct = {
         name: this.productname,
         price: this.productPrice,
-        id: this.productService.allProducts.length, // Generate a new unique ID
-        sales: 0 // Initial sales set to 0
+        id: this.productService.allProducts.length,
+        sales: 0
       };
 
-      // Add the new product to the local array
       this.productService.allProducts.push(newProduct);
 
-      // Save the new product to Firestore
       const productDocRef = doc(this.firestore, 'products', newProduct.id.toString());
       await setDoc(productDocRef, newProduct);
 
-      // Reset form fields
       this.productname = '';
       this.productPrice = 0;
 
-      // Close the dialog
       this.dialogRef.close();
     } catch (error) {
       console.error('Error saving product:', error);

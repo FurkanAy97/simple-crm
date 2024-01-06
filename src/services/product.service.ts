@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, setDoc, doc, getDocs, deleteDoc } from 'firebase/firestore';
 
 
@@ -72,28 +71,42 @@ export class ProductService {
   ];
 
   allProducts: any[];
-  isKnown: any;
-
+  isKnown: boolean;
+  db = getFirestore();
+  loading: boolean;
   constructor() {
-    this.checkIfKnownUser()
+  }
+
+  checkIfKnownUser() {
+    let knownState = localStorage.getItem('isKnown')
+    if (knownState !== 'true') {
+      console.log('User is not known');
+      this.uploadExampleProductsToFirebase()
+    }
+  }
+
+  saveKnownState() {
+    localStorage.setItem('isKnown', 'true');
+    this.isKnown = true
+    console.log('Saved isKnown state to localStorage.');
   }
 
   async uploadExampleProductsToFirebase() {
-    const db = getFirestore();
 
     try {
-      const productsCollection = collection(db, 'products');
-
-      // Clear existing data in the collection
-      await this.clearCollection(db, productsCollection);
-
-
-      // Upload example products to Firebase
+      const productsCollection = collection(this.db, 'products');
+      this.loading = true
+      console.log(this.loading);
+      
+      await this.clearCollection(this.db, productsCollection);
+      
+      
       for (const product of this.allExampleProducts) {
         await setDoc(doc(productsCollection, product.id.toString()), product);
       }
-
       console.log('Example products uploaded to Firebase.');
+      this.loading = false
+      console.log(this.loading);
     } catch (error) {
       console.error('Error uploading example products to Firebase:', error);
     }
@@ -109,13 +122,32 @@ export class ProductService {
     console.log('Collection cleared.');
   }
 
+  async downloadProducts() {
+    const productsCollection = collection(this.db, 'products');
+
+    try {
+      const querySnapshot = await getDocs(productsCollection);
+
+      this.allProducts = [];
+
+      querySnapshot.forEach((doc) => {
+        const productData = doc.data();
+        ;
+        this.allProducts.push(productData);
+      })
+
+
+
+    } catch (error) {
+      console.error('Error getting documents: ', error);
+    }
+  }
 
   getProducts() {
     return this.allProducts;
   }
 
   getSales(productId: number) {
-    // Assuming each product has a unique ID
     const product = this.allProducts.find(p => p.id === productId);
     return product.sales;
   }
@@ -133,35 +165,13 @@ export class ProductService {
   }
 
   getRevenue() {
-    // Using the reduce function to sum up the sales numbers
     const totalRevenue = this.allProducts.reduce((sum, product) => {
       return sum + product.sales;
     }, 0);
-
-    console.log("Gesamtumsatz:", totalRevenue);
     return totalRevenue;
-
   }
 
-  checkIfKnownUser() {
-    this.loadKnownState(); // Add parentheses to call the method
-    if (!this.isKnown) {
-      this.allProducts = this.allExampleProducts;
-    } else {
-      this.saveKnownState();
-    }
-  }
 
-  private loadKnownState() {
-    const storedKnownState = localStorage.getItem('isKnown');
-    if (storedKnownState) {
-      this.isKnown = true;
-    } else {
-      this.isKnown = false;
-    }
-  }
-
-  private saveKnownState() {
-    localStorage.setItem('isKnown', 'true');
-  }
 }
+
+

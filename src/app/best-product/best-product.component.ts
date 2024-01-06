@@ -12,7 +12,8 @@ export class BestProductComponent {
 
   constructor(private productService: ProductService) {}
 
-  ngOnInit() {
+  async ngOnInit() {
+    await this.productService.downloadProducts(); 
     this.topProduct = this.productService.getBestProduct();
     this.totalRevenue = this.productService.getRevenue()
     console.log(this.topProduct);
