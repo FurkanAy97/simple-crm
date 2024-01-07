@@ -15,7 +15,7 @@ import { Auth } from 'firebase/auth';
 })
 export class AuthService {
   private auth: Auth;
-  private isLoggedIn = false;
+  public isLoggedIn = false;
   private isLoggedInAsGuest = false;
   public newCreatedEmail: string = '';
 
@@ -79,7 +79,7 @@ export class AuthService {
     }
   }
 
-  public guestLogin() {
+  public async guestLogin() {
     this.isLoggedIn = true;
     this.isLoggedInAsGuest = true;
     this.saveAuthState();

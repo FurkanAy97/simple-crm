@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
 import { ProductService } from '../../services/product.service';
+import { AuthService } from 'src/services/auth.service';
 Chart.register(...registerables);
 
 @Component({
@@ -12,7 +13,7 @@ export class SalesChartComponent {
     productNames: any[] = [];
     salesNumbers: any[] = [];
 
-    constructor(private productService: ProductService) {}
+    constructor(private productService: ProductService, public authService: AuthService) {}
 
     async ngOnInit() {
         await this.productService.downloadProducts(); // Wait for products to be downloaded

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ProductService } from '../../services/product.service';
+import { AuthService } from 'src/services/auth.service';
 
 @Component({
   selector: 'app-best-product',
@@ -10,7 +11,7 @@ export class BestProductComponent {
   topProduct: string;
   totalRevenue: number;
 
-  constructor(private productService: ProductService) {}
+  constructor(private productService: ProductService, public authService: AuthService) {}
 
   async ngOnInit() {
     await this.productService.downloadProducts(); 

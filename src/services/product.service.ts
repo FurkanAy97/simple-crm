@@ -77,11 +77,11 @@ export class ProductService {
   constructor() {
   }
 
-  checkIfKnownUser() {
+  async checkIfKnownUser() {
     let knownState = localStorage.getItem('isKnown')
     if (knownState !== 'true') {
       console.log('User is not known');
-      this.uploadExampleProductsToFirebase()
+      await this.uploadExampleProductsToFirebase()
     }
   }
 
