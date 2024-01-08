@@ -12,20 +12,16 @@ Chart.register(...registerables);
 export class SalesChartComponent {
     productNames: any[] = [];
     salesNumbers: any[] = [];
+    productIDs: any;
 
     constructor(private productService: ProductService, public authService: AuthService) {}
 
-    async ngOnInit() {
-        await this.productService.downloadProducts(); // Wait for products to be downloaded
+    async initializeChart() {
+        await this.productService.downloadProducts();
+        await this.getProductNames();
+        await this.getSales();
 
         const allProducts = this.productService.getProducts();
-
-        for (let i = 0; i < allProducts.length; i++) {
-            const sales = this.productService.getSales(i);
-            this.salesNumbers.push(sales);
-        }
-
-        this.getProductNames();
 
         let myChart = new Chart("myChart", {
             type: 'bar',
@@ -71,10 +67,19 @@ export class SalesChartComponent {
         });
     }
 
-    getProductNames() {
+    async getProductNames() {
         for (let i = 0; i < this.productService.allProducts.length; i++) {
             const productName = this.productService.allProducts[i]['name'];
             this.productNames.push(productName);
         }
+    }
+
+    async getSales() {
+        this.productService.allProducts.forEach(product => {
+            let productName = product.name
+            const resultObject = this.productService.allProducts.find(obj => obj.name === productName);
+            let productSales = resultObject.sales
+            this.salesNumbers.push(productSales)
+        });
     }
 }

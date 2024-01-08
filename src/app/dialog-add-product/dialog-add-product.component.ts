@@ -17,6 +17,7 @@ export class DialogAddProductComponent {
 
   firestore = getFirestore();
   product: any;
+  productSales: any;
 
   constructor(
     public dialogRef: MatDialogRef<DialogEditUserComponent>,
@@ -31,7 +32,7 @@ export class DialogAddProductComponent {
         name: this.productname,
         price: this.productPrice,
         id: this.productService.allProducts.length,
-        sales: 0
+        sales: this.productSales
       };
 
       this.productService.allProducts.push(newProduct);
@@ -41,6 +42,7 @@ export class DialogAddProductComponent {
 
       this.productname = '';
       this.productPrice = 0;
+      this.productSales = 0;
 
       this.dialogRef.close();
     } catch (error) {

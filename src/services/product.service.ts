@@ -77,13 +77,18 @@ export class ProductService {
   constructor() {
   }
 
-  async checkIfKnownUser() {
-    let knownState = localStorage.getItem('isKnown')
-    if (knownState !== 'true') {
-      console.log('User is not known');
-      await this.uploadExampleProductsToFirebase()
-    }
+  async checkIfKnownUser(): Promise<void> {
+    return new Promise(async (resolve) => {
+      let knownState = localStorage.getItem('isKnown');
+      if (knownState !== 'true') {
+        console.log('User is not known');
+        await this.uploadExampleProductsToFirebase();
+      }
+      resolve();
+    });
   }
+  
+  
 
   saveKnownState() {
     localStorage.setItem('isKnown', 'true');
@@ -97,10 +102,9 @@ export class ProductService {
       const productsCollection = collection(this.db, 'products');
       this.loading = true
       console.log(this.loading);
-      
+
       await this.clearCollection(this.db, productsCollection);
-      
-      
+
       for (const product of this.allExampleProducts) {
         await setDoc(doc(productsCollection, product.id.toString()), product);
       }
@@ -124,20 +128,13 @@ export class ProductService {
 
   async downloadProducts() {
     const productsCollection = collection(this.db, 'products');
-
     try {
       const querySnapshot = await getDocs(productsCollection);
-
       this.allProducts = [];
-
       querySnapshot.forEach((doc) => {
         const productData = doc.data();
-        ;
         this.allProducts.push(productData);
       })
-
-
-
     } catch (error) {
       console.error('Error getting documents: ', error);
     }

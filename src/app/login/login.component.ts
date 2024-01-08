@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
 
 
   async onSubmit() {
-    this.productService.checkIfKnownUser();
+    await this.productService.checkIfKnownUser();
     try {
       await this.authService.loginWithEmailAndPassword(this.email, this.password).then(() => {
         this.productService.checkIfKnownUser()
@@ -53,17 +53,20 @@ export class LoginComponent implements OnInit {
 
 
   async handleGuestLogin() {
+    await this.productService.checkIfKnownUser();
     try {
-      await this.productService.checkIfKnownUser();
-      this.authService.guestLogin();
-      this.productService.saveKnownState();
+      await this.authService.guestLogin().then(() => {
         this.snackBar.open('You have successfully logged in as a Guest.', 'Close', {
-            duration: 3000,
+          duration: 3000,
         });
+        this.router.navigate(['/dashboard']);
+        this.productService.saveKnownState();
+        location.reload();
+      })
     } catch (error) {
-        console.error('Error during guest login:', error);
+      console.error('Error during guest login:', error);
     }
-}
+  }
 
 }
 

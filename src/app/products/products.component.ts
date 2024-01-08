@@ -10,10 +10,18 @@ import { DialogAddProductComponent } from '../dialog-add-product/dialog-add-prod
 })
 export class ProductsComponent {
   constructor(private productService: ProductService, public dialog: MatDialog) {
+    this.initialize();
   }
-  allProducts: any[] = this.productService.allProducts;
+
+  allProducts: any[];
 
   openDialog(): void {
     this.dialog.open(DialogAddProductComponent);
   }
+
+  private async initialize() {
+    await this.productService.downloadProducts();
+    this.allProducts = this.productService.allProducts;
+  }
 }
+
