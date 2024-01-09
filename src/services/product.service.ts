@@ -87,8 +87,6 @@ export class ProductService {
       resolve();
     });
   }
-  
-  
 
   saveKnownState() {
     localStorage.setItem('isKnown', 'true');

@@ -3,6 +3,7 @@ import { AuthService } from 'src/services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { ProductService } from 'src/services/product.service';
+import { UserService } from 'src/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit {
   isKnown: boolean = false;
 
 
-  constructor(private authService: AuthService, private snackBar: MatSnackBar, private router: Router, private productService: ProductService) {
+  constructor(private authService: AuthService, private snackBar: MatSnackBar, private router: Router, private productService: ProductService, private userService: UserService) {
     authService.isLoggedIn = false
   }
 
@@ -29,9 +30,9 @@ export class LoginComponent implements OnInit {
 
   async onSubmit() {
     await this.productService.checkIfKnownUser();
+    /* await this.userService.checkIfKnownUser(); */
     try {
       await this.authService.loginWithEmailAndPassword(this.email, this.password).then(() => {
-        this.productService.checkIfKnownUser()
         this.snackBar.open('You have successfully logged in.', 'Close', {
           duration: 3000,
         });
@@ -50,10 +51,11 @@ export class LoginComponent implements OnInit {
       }
     }
   }
-
-
+  
+  
   async handleGuestLogin() {
     await this.productService.checkIfKnownUser();
+    /* await this.userService.checkIfKnownUser(); */
     try {
       await this.authService.guestLogin().then(() => {
         this.snackBar.open('You have successfully logged in as a Guest.', 'Close', {

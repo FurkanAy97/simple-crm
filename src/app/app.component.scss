@@ -82,5 +82,13 @@ mat-toolbar {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     z-index: 9999;
+    gap: 20px;
+
+    h1 {
+        color: white;
+        font-weight: bold;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    }
 }

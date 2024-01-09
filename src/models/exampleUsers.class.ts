@@ -3,7 +3,7 @@ export class ExampleUsers {
       {
         "firstName": "Bernd",
         "lastName": "Brauer",
-        "email": "Bernd.Brauer@example.com",
+        "email": "Bernd.Brauer@outlook.com",
         "birthDate": "1990-05-15",
         "street": "Hauptstraße 123",
         "zipCode": "12345",
@@ -12,7 +12,7 @@ export class ExampleUsers {
       {
         "firstName": "Anna",
         "lastName": "Schmidt",
-        "email": "anna.schmidt@example.com",
+        "email": "anna.schmidt@gmail.com",
         "birthDate": "1985-08-22",
         "street": "Bahnhofstraße 456",
         "zipCode": "54321",
@@ -21,7 +21,7 @@ export class ExampleUsers {
       {
         "firstName": "Paul",
         "lastName": "Müller",
-        "email": "paul.mueller@example.com",
+        "email": "paul.mueller@outlook.com",
         "birthDate": "1992-03-10",
         "street": "Lindenallee 789",
         "zipCode": "67890",
@@ -30,7 +30,7 @@ export class ExampleUsers {
       {
         "firstName": "Sophie",
         "lastName": "Wagner",
-        "email": "sophie.wagner@example.com",
+        "email": "sophie.wagner@gmail.com",
         "birthDate": "1988-12-05",
         "street": "Eichenweg 101",
         "zipCode": "11223",
@@ -39,7 +39,7 @@ export class ExampleUsers {
       {
         "firstName": "Markus",
         "lastName": "Hoffmann",
-        "email": "markus.hoffmann@example.com",
+        "email": "markus.hoffmann@outlook.com",
         "birthDate": "1995-07-18",
         "street": "Birkenstraße 222",
         "zipCode": "33445",

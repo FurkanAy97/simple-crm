@@ -34,6 +34,7 @@
     </div>
 </mat-drawer-container>
 
-<div *ngIf="productService.loading" class="overlay">
+<div *ngIf="productService.loading || userService.loading" class="overlay">
     <mat-spinner diameter="100"></mat-spinner>
+    <h1>Sie werden angemeldet..</h1>
 </div>
