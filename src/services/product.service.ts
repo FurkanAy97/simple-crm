@@ -167,8 +167,6 @@ export class ProductService {
     }, 0);
     return totalRevenue;
   }
-
-
 }
 
 

@@ -4,10 +4,12 @@
             <tr>
                 <th>Name</th>
                 <th>Price</th>
+                <th>Sales</th>
             </tr>
             <tr *ngFor="let product of allProducts">
                 <td>{{ product.name }}</td>
                 <td>{{ product.price }}€</td>
+                <td>{{ product.sales }}</td>
             </tr>
         </table>
     </mat-card-content>
