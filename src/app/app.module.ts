@@ -36,6 +36,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { DialogAddProductComponent } from './dialog-add-product/dialog-add-product.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { CityChartComponent } from './city-chart/city-chart.component';
 
 
 
@@ -48,7 +49,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 @NgModule({
-  declarations: [AppComponent, DashboardComponent, UserComponent, DialogAddUserComponent, UserDetailComponent, DialogEditAddressComponent, DialogEditUserComponent, SalesChartComponent, ProductsComponent, BestProductComponent, LoginComponent, SignUpComponent, DialogAddProductComponent],
+  declarations: [AppComponent, DashboardComponent, UserComponent, DialogAddUserComponent, UserDetailComponent, DialogEditAddressComponent, DialogEditUserComponent, SalesChartComponent, ProductsComponent, BestProductComponent, LoginComponent, SignUpComponent, DialogAddProductComponent, CityChartComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
