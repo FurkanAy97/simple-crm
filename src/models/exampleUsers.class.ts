@@ -6,7 +6,7 @@ export class ExampleUsers {
         "email": "Bernd.Brauer@outlook.com",
         "birthDate": "1990-05-15",
         "street": "Hauptstraße 123",
-        "zipCode": "12345",
+        "zipCode": "10176",
         "city": "Berlin"
       },
       {

@@ -22,7 +22,8 @@ export class SalesChartComponent {
         await this.getSales();
 
         const allProducts = this.productService.getProducts();
-
+        console.log(this.salesNumbers);
+        
         let myChart = new Chart("myChart", {
             type: 'bar',
             data: {

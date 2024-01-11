@@ -19,8 +19,16 @@ export class CityChartComponent implements AfterViewInit {
   @ViewChild('myCityChartCanvas') myCityChartCanvas!: ElementRef;
   allUsers: any[];
   firestore = getFirestore();
+  cityCounts: { [key: string]: number } = {};
 
-  constructor(private productService: ProductService, public authService: AuthService, private userService: UserService) {
+  constructor(public authService: AuthService) {
+  }
+
+  countCities() {
+    this.userCities.forEach(city => {
+      this.cityCounts[city] = (this.cityCounts[city] || 0) + 1;
+    });
+    console.log(this.cityCounts);
   }
 
   async ngAfterViewInit() {
@@ -34,11 +42,14 @@ export class CityChartComponent implements AfterViewInit {
           userData['id'] = doc.id;
           this.allUsers.push(userData);
         });
+
         this.timeStampIntoDate();
         resolve();
       });
     });
-    await this.extractCities();
+
+    this.extractCities();
+    this.countCities();  
     this.initializeChart();
   }
 
@@ -53,26 +64,24 @@ export class CityChartComponent implements AfterViewInit {
       });
       user.birthDate = formattedDate;
     });
-
   }
 
-  async extractCities() {
-
+  extractCities() {
     this.userCities = this.allUsers.map(user => user.city);
-
+    console.log(this.userCities);
   }
 
-  async initializeChart() {
-    const allProducts = this.productService.getProducts();
-
+  initializeChart() {
+    const cityLabels = Object.keys(this.cityCounts);
+    const cityData = Object.values(this.cityCounts);
 
     let myCityChart = new Chart('myCityChart', {
       type: 'pie',
       data: {
-        labels: this.userCities,
+        labels: cityLabels,
         datasets: [{
           label: '# of Sales',
-          data: this.userCities.length,
+          data: cityData,
           backgroundColor: [
             'rgba(255, 99, 132, 1)',
             'rgba(54, 162, 235, 1)',
