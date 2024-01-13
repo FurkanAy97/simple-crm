@@ -12,7 +12,9 @@ export class UserService {
   birthDateObj: any;
   loading: boolean;
   
-  constructor() { }
+  constructor() {
+    this.checkIfKnownUser()
+   }
 
   async checkIfKnownUser(): Promise<void> {
     return new Promise(async (resolve) => {
