@@ -1,8 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddUserComponent } from '../dialog-add-user/dialog-add-user.component';
-import { Firestore, collection, deleteDoc, doc, getDocs, getFirestore, onSnapshot, setDoc } from '@angular/fire/firestore';
-import { ExampleUsers } from 'src/models/exampleUsers.class';
+import { collection, getFirestore, onSnapshot } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-user',
@@ -13,11 +12,12 @@ export class UserComponent {
 
   firestore = getFirestore();
   allUsers: any[] = [];
-  exampleUsers = new ExampleUsers()
   birthDateObj: any;
   loading: boolean;
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog) {
+    
+  }
 
   async ngOnInit() {
     const userCollection = collection(this.firestore, 'users')

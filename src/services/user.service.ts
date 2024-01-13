@@ -11,10 +11,8 @@ export class UserService {
   exampleUsers = new ExampleUsers()
   birthDateObj: any;
   loading: boolean;
-  
-  constructor() {
-    this.checkIfKnownUser()
-   }
+
+  constructor() {}
 
   async checkIfKnownUser(): Promise<void> {
     return new Promise(async (resolve) => {
@@ -36,7 +34,7 @@ export class UserService {
 
       await this.clearCollection(this.firestore, userCollection);
 
-      for (const user of this.exampleUsers.exampleUsersArray) {
+      for (const user of this.exampleUsers.usersArray) {
         await setDoc(doc(userCollection), user);
       }
       console.log('Example products uploaded to Firebase.');
@@ -55,5 +53,20 @@ export class UserService {
     });
 
     console.log('Collection cleared.');
+  }
+
+  async downloadUsers() {
+    const usersCollection = collection(this.firestore, 'users');
+    try {
+      const querySnapshot = await getDocs(usersCollection);
+      this.allUsers = [];
+      querySnapshot.forEach((doc) => {
+        const userData = doc.data();
+        this.allUsers.push(userData);
+      })
+      
+    } catch (error) {
+      console.error('Error getting documents: ', error);
+    }
   }
 }

@@ -27,3 +27,17 @@
         {{user.zipCode}} {{user.city}}
     </mat-card-content>
 </mat-card>
+
+<mat-card class="mt-32 user-purchases">
+    <mat-card-title>Purchases</mat-card-title>
+    <table class="user-table">
+        <tr>
+            <th>Title</th>
+            <th>Price</th>
+        </tr>
+        <tr *ngFor="let purchase of userPurchases">
+            <td>{{ purchase.name }}</td>
+            <td>{{ purchase.price }}</td>
+        </tr>
+    </table>
+</mat-card>

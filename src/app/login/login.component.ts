@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
 
   async onSubmit() {
     await this.productService.checkIfKnownUser();
-    /* await this.userService.checkIfKnownUser(); */
+    await this.userService.checkIfKnownUser();
     try {
       await this.authService.loginWithEmailAndPassword(this.email, this.password).then(() => {
         this.snackBar.open('You have successfully logged in.', 'Close', {
@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
   
   async handleGuestLogin() {
     await this.productService.checkIfKnownUser();
-    /* await this.userService.checkIfKnownUser(); */
+    await this.userService.checkIfKnownUser();
     try {
       await this.authService.guestLogin().then(() => {
         this.snackBar.open('You have successfully logged in as a Guest.', 'Close', {
