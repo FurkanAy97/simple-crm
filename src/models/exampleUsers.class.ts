@@ -111,7 +111,4 @@ export class ExampleUsers {
     }
   ];
 
-  constructor() {
-    // If you need to perform any actions when an instance is created, you can do it here.
-  }
 }
