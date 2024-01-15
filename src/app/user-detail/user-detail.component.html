@@ -34,10 +34,12 @@
         <tr>
             <th>Title</th>
             <th>Price</th>
+            <th>Units</th>
         </tr>
         <tr *ngFor="let purchase of userPurchases">
             <td>{{ purchase.name }}</td>
             <td>{{ purchase.price }}</td>
+            <td>{{ purchase.sales }}</td>
         </tr>
     </table>
 </mat-card>
