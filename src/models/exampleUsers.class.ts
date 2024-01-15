@@ -13,13 +13,13 @@ export class ExampleUsers {
           'name': 'Reusable Water Bottles',
           'price': 11,
           'id': 0,
-          'sales': 12
+          'sales': 3
         },
         {
           'name': 'Scented Candles',
           'price': 17,
           'id': 2,
-          'sales': 36
+          'sales': 6
         }
       ]
     },
@@ -36,7 +36,7 @@ export class ExampleUsers {
           'name': 'Customizable Phone Cases',
           'price': 25,
           'id': 1,
-          'sales': 18
+          'sales': 2
         }
       ]
     },
@@ -46,20 +46,20 @@ export class ExampleUsers {
       "email": "paul.mueller@outlook.com",
       "birthDate": "1992-03-10",
       "street": "Lindenallee 789",
-      "zipCode": "67890",
-      "city": "München",
+      "zipCode": "33445",
+      "city": "Frankfurt am Main",
       "purchases": [
         {
           'name': 'Cooking Utensil Set',
           'price': 23,
           'id': 4,
-          'sales': 35
+          'sales': 1
         },
         {
           'name': 'Portable Bluetooth Speakers',
           'price': 40,
           'id': 5,
-          'sales': 23
+          'sales': 3
         }
       ]
     },
@@ -76,13 +76,13 @@ export class ExampleUsers {
           'name': 'Aromatherapy Essential Oils Kit',
           'price': 22,
           'id': 8,
-          'sales': 39
+          'sales': 2
         },
         {
           'name': 'Stylish Desk Organizer',
           'price': 28,
           'id': 9,
-          'sales': 26
+          'sales': 1
         }
       ]
     },
@@ -99,13 +99,36 @@ export class ExampleUsers {
           'name': 'Notebook and Pen Sets',
           'price': 16,
           'id': 3,
-          'sales': 10
+          'sales': 13
         },
         {
           'name': 'Fitness Resistance Bands Set',
           'price': 30,
           'id': 7,
-          'sales': 14
+          'sales': 1
+        }
+      ]
+    },
+    {
+      "firstName": "Sabine",
+      "lastName": "Fischer",
+      "email": "sabine.fischer@example.com",
+      "birthDate": "1983-09-28",
+      "street": "Am Rosenhügel 789",
+      "zipCode": "54321",
+      "city": "Stuttgart",
+      "purchases": [
+        {
+          'name': 'Handcrafted Wooden Clock',
+          'price': 18,
+          'id': 10,
+          'sales': 1
+        },
+        {
+          'name': 'Gourmet Coffee Beans',
+          'price': 25,
+          'id': 11,
+          'sales': 4
         }
       ]
     }

@@ -30,7 +30,7 @@
 
 <mat-card class="mt-32 user-purchases">
     <mat-card-title>Purchases</mat-card-title>
-    <table class="user-table">
+    <table class="user-table" *ngIf="userPurchases">
         <tr>
             <th>Title</th>
             <th>Price</th>
@@ -42,4 +42,5 @@
             <td>{{ purchase.sales }}</td>
         </tr>
     </table>
+    <div class="no-purchases-container" *ngIf="!userPurchases">No Purchases</div>
 </mat-card>

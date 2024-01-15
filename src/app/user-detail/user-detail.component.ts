@@ -17,13 +17,11 @@ export class UserDetailComponent implements OnInit {
   userId: any;
   user: User = new User()
   firestore = getFirestore();
-  allPurchases: any;
   allUsers: any[];
   foundUser: any;
   userPurchases: any;
 
   constructor(private route: ActivatedRoute, public dialog: MatDialog, private userService: UserService) {
-
 
   }
 

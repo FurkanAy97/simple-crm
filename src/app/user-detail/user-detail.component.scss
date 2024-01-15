@@ -1,70 +1,74 @@
-.user-detail-header{
-    height: 250px;
-    background-color: #F27C21;
-    color: white;
-    display: flex;
-    align-items: flex-end;
-    padding: 18px 20px;
-    flex-direction: row;
-    gap: 8px;
+.user-detail-header {
+  height: 250px;
+  background-color: #F27C21;
+  color: white;
+  display: flex;
+  align-items: flex-end;
+  padding: 18px 20px;
+  flex-direction: row;
+  gap: 8px;
 }
 
-.default-profile{
-    width: 100px;
-    border-radius: 100%;
-    object-fit: cover;
+.default-profile {
+  width: 100px;
+  border-radius: 100%;
+  object-fit: cover;
 }
 
-.user-details{
-    height: 100px;
-    margin-left: 32px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
+.user-details {
+  height: 100px;
+  margin-left: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
 
-    h2{
-        margin-bottom: 0;
-    }
+  h2 {
+    margin-bottom: 0;
+  }
 }
 
-.dot-btn{
-    position: absolute;
-    top: 0;
-    right: 0;
+.dot-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 .user-purchases {
-    mat-card-title {
-      margin-bottom: 16px;
-      padding: 16px;
+  mat-card-title {
+    padding: 16px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+
+    th {
+      text-align: start;
+      padding: 12px;
     }
-  
-    table {
-      width: 100%;
-      border-collapse: collapse;
-  
-      th {
-        text-align: start;
-        padding: 12px;
+
+    tr {
+      &:nth-child(even) {
+        background-color: rgba(0, 0, 0, 0.08);
       }
-  
-      tr {
-        &:nth-child(even) {
-          background-color: rgba(0, 0, 0, 0.08);
-        }
-  
-        &:hover {
-          background-color: rgba(0, 0, 0, 0.04); /* Set the background color for the hovered row */
-        }
-  
-        td {
-          padding: 12px; /* Adjust the padding as needed */
-        }
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.04);
+      }
+
+      td {
+        padding: 12px;
       }
     }
   }
-  
-  
-  
-  
+}
+
+.no-purchases-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  font-weight: bold;
+  font-size: large;  
+}

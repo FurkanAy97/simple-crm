@@ -12,61 +12,61 @@ export class ProductService {
       'name': 'Reusable Water Bottles',
       'price': 11,
       'id': 0,
-      'sales': 1200
+      'sales': 32
     },
     {
       'name': 'Customizable Phone Cases',
       'price': 25,
       'id': 1,
-      'sales': 800
+      'sales': 28
     },
     {
       'name': 'Scented Candles',
       'price': 17,
       'id': 2,
-      'sales': 600
+      'sales': 17
     },
     {
       'name': 'Notebook and Pen Sets',
       'price': 16,
       'id': 3,
-      'sales': 1000
+      'sales': 28
     },
     {
       'name': 'Cooking Utensil Set',
       'price': 23,
       'id': 4,
-      'sales': 500
+      'sales': 35
     },
     {
       'name': 'Portable Bluetooth Speakers',
       'price': 40,
       'id': 5,
-      'sales': 300
+      'sales': 18
     },
     {
       'name': 'Organic Tea Sampler',
       'price': 19,
       'id': 6,
-      'sales': 750
+      'sales': 27
     },
     {
       'name': 'Fitness Resistance Bands Set',
       'price': 30,
       'id': 7,
-      'sales': 400
+      'sales': 34
     },
     {
       'name': 'Aromatherapy Essential Oils Kit',
       'price': 22,
       'id': 8,
-      'sales': 900
+      'sales': 39
     },
     {
       'name': 'Stylish Desk Organizer',
       'price': 28,
       'id': 9,
-      'sales': 600
+      'sales': 22
     }
   ];
 
