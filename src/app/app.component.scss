@@ -100,3 +100,9 @@ mat-toolbar {
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
     }
 }
+
+@media (max-width: 1000px) {
+    .router-container {
+        padding: 16px 0;
+    }
+}

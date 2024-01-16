@@ -49,7 +49,7 @@ export class CityChartComponent implements AfterViewInit {
     });
 
     this.extractCities();
-    this.countCities();  
+    this.countCities();
     this.initializeChart();
   }
 
@@ -114,7 +114,9 @@ export class CityChartComponent implements AfterViewInit {
           y: {
             beginAtZero: true
           }
-        }
+        },
+        responsive: true, // Make the chart responsive
+        maintainAspectRatio: false, // Maintain the aspect ratio
       }
     });
   }

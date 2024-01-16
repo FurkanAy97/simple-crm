@@ -20,10 +20,10 @@ export class SalesChartComponent {
         await this.productService.downloadProducts();
         await this.getProductNames();
         await this.getSales();
-
+    
         const allProducts = this.productService.getProducts();
         console.log(this.salesNumbers);
-        
+    
         let myChart = new Chart("myChart", {
             type: 'bar',
             data: {
@@ -63,11 +63,17 @@ export class SalesChartComponent {
                     y: {
                         beginAtZero: true
                     }
-                }
+                },
+                responsive: true, // Make the chart responsive
+                maintainAspectRatio: false, // Maintain the aspect ratio
             }
         });
+    
     }
+    
 
+
+     
     async getProductNames() {
         for (let i = 0; i < this.productService.allProducts.length; i++) {
             const productName = this.productService.allProducts[i]['name'];
