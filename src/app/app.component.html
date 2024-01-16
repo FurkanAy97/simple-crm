@@ -1,6 +1,6 @@
-<mat-drawer-container class="mat-drawer-container" autosize authService.isAuthenticated>
-    <mat-drawer #drawer class="sidenav" [opened]="authService.isAuthenticated && !isSmallScreen" mode="side">
-        
+<mat-drawer-container class="mat-drawer-container" [autosize]="isSmallScreen" *ngIf="authService.isAuthenticated">
+    <mat-drawer #drawer class="sidenav" [opened]="!isSmallScreen" [mode]="drawerMode">
+
         <div class="sidenav-content" *ngIf="authService.isAuthenticated">
             <div class="sidenav-top">
                 <div class="logo-container">
@@ -23,8 +23,7 @@
 
     <div>
         <mat-toolbar color="primary" *ngIf="authService.isAuthenticated">
-            <button (click)="drawer.toggle()" mat-icon-button class="example-icon"
-                aria-label="Example icon-button with menu icon">
+            <button (click)="drawer.toggle()" mat-icon-button class="example-icon">
                 <mat-icon>menu</mat-icon>
             </button>
             <span>Simple CRM</span>
