@@ -7,11 +7,19 @@
     justify-content: space-between;
     flex-direction: column;
     height: 90dvh;
+
+    @media (max-width: 1000px) {
+        // Styles when the window width is below 1000px
+        &[opened="false"] {
+          width: 0;
+        }
+      }
 }
 
 
 .sidenav {
     width: 300px;
+    
 }
 
 .logo-container {

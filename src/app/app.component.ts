@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, HostListener, inject } from '@angular/core';
 import { Firestore, collection, collectionData } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/services/auth.service';
@@ -15,6 +15,8 @@ export class AppComponent {
   firestore: Firestore = inject(Firestore);
   items$: Observable<any[]>;
 
+  isSmallScreen = window.innerWidth < 1000;
+
   constructor(
     public authService: AuthService,
     public productService: ProductService,
@@ -23,6 +25,11 @@ export class AppComponent {
     const aCollection = collection(this.firestore, 'items');
     this.items$ = collectionData(aCollection);
     this.authService.isAuthenticated;
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event): void {
+    this.isSmallScreen = window.innerWidth < 1000;
   }
 
   logout(): void {
