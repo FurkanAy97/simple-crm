@@ -1,5 +1,5 @@
-<mat-drawer-container class="mat-drawer-container" [autosize]="isSmallScreen" *ngIf="authService.isAuthenticated">
-    <mat-drawer #drawer class="sidenav" [opened]="!isSmallScreen" [mode]="drawerMode">
+<mat-drawer-container class="mat-drawer-container" autosize authService.isAuthenticated>
+    <mat-drawer #drawer class="sidenav"  [mode]="drawerMode">
 
         <div class="sidenav-content" *ngIf="authService.isAuthenticated">
             <div class="sidenav-top">

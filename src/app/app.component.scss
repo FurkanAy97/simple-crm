@@ -2,6 +2,10 @@
     height: 100dvh;
 }
 
+.mat-drawer-container .sidenav.opened {
+    transform: translateX(0);
+}
+
 .sidenav-content {
     display: flex;
     justify-content: space-between;
@@ -9,17 +13,18 @@
     height: 90dvh;
 
     @media (max-width: 1000px) {
+
         // Styles when the window width is below 1000px
         &[opened="false"] {
-          width: 0;
+            width: 0;
         }
-      }
+    }
 }
 
 
 .sidenav {
     width: 300px;
-    
+
 }
 
 .logo-container {

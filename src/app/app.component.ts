@@ -3,7 +3,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { MatDrawerMode, MatSidenav } from '@angular/material/sidenav';
 import { Firestore, collection, collectionData } from '@angular/fire/firestore';
 import { Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { filter, takeUntil } from 'rxjs/operators';
 import { AuthService } from 'src/services/auth.service';
 import { ProductService } from 'src/services/product.service';
 import { UserService } from 'src/services/user.service';
@@ -20,9 +20,9 @@ export class AppComponent implements OnDestroy {
   firestore: Firestore = inject(Firestore);
   items$: Observable<any[]>;
 
-  isSmallScreen = window.innerWidth < 1000;
-  drawerMode: MatDrawerMode = this.isSmallScreen ? 'over' : 'side';
-
+  isSmallScreen = false;
+  drawerMode: MatDrawerMode;
+  @ViewChild('drawer') drawer!: MatSidenav;
   private ngUnsubscribe = new Subject<void>();
 
   constructor(
@@ -39,42 +39,70 @@ export class AppComponent implements OnDestroy {
     this.breakpointObserver.observe([Breakpoints.Handset, Breakpoints.Tablet])
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(result => {
-        this.isSmallScreen = result.matches;
-        this.drawerMode = this.isSmallScreen ? 'over' : 'side';
+        this.isSmallScreen = this.isSmallScreenCheck();
+        this.drawerMode = this.calculateDrawerMode();
       });
 
     // Subscribe to route changes and close the drawer on NavigationEnd
     this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd),
       takeUntil(this.ngUnsubscribe)
-    ).subscribe(event => {
-      if (event instanceof NavigationEnd && this.isSmallScreen) {
-        // Close the drawer
+    ).subscribe((event: NavigationEnd) => {
+      if (event.url === '/') {
+        this.isSmallScreen = true;
+      } else {
+        this.isSmallScreen = this.isSmallScreenCheck();
+      }
+
+      if (event.url === '/dashboard' && !this.isSmallScreen) {
+        this.openDrawer();
+      }
+
+      if (this.isSmallScreen && this.router.url !== '/') {
         this.closeDrawer();
       }
+
+      this.drawerMode = this.calculateDrawerMode();
     });
   }
-  @ViewChild('drawer') drawer!: MatSidenav;
+
+
+  private calculateDrawerMode(): MatDrawerMode {
+    return this.isSmallScreen ? 'over' : 'side';
+  }
+
+  private isSmallScreenCheck(): boolean {
+    // Check if the route path is empty (root path)
+    return this.router.url !== '/' && window.innerWidth < 1000;
+  }
+
+
 
   @HostListener('window:resize', ['$event'])
   onResize(event: Event): void {
     this.isSmallScreen = window.innerWidth < 1000;
-    this.drawerMode = this.isSmallScreen ? 'over' : 'side';
+    this.drawerMode = this.calculateDrawerMode();
   }
 
   logout(): void {
+    this.closeDrawer()
     this.authService.logout();
   }
 
-  // Unsubscribe from observables when the component is destroyed
   ngOnDestroy(): void {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
   }
 
-  // Access the mat-drawer through the ViewChild reference and close it
   private closeDrawer(): void {
     if (this.drawer) {
       this.drawer.close();
+    }
+  }
+
+  private openDrawer(): void {
+    if (this.drawer) {
+      this.drawer.open();
     }
   }
 }
