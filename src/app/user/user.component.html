@@ -1,6 +1,6 @@
 <mat-card>
-    <mat-card-content *ngIf="allUsers && allUsers.length > 0">
-        <table class="user-table">
+    <mat-card-content class="mat-card-content" *ngIf="allUsers && allUsers.length > 0">
+        <table class="user-table" *ngIf="!isSmall">
             <tr>
                 <th>Name</th>
                 <th>Lastname</th>
@@ -19,7 +19,19 @@
                 <td>{{ user.zipCode }}</td>
                 <td>{{ user.city }}</td>
             </tr>
+        </table> 
+        <table class="user-table-responsive" *ngIf="isSmall">
+            <tr *ngFor="let user of allUsers" [routerLink]="['/user/' + user.id]">
+                <td><span class="row-label">First Name:</span> {{ user.firstName }}</td>
+                <td><span class="row-label">Lastname:</span> {{ user.lastName }}</td>
+                <td><span class="row-label">E-Mail:</span> {{ user.email }}</td>
+                <td><span class="row-label">Birthdate:</span> {{ user.birthDate }}</td>
+                <td><span class="row-label">Street:</span> {{ user.street }}</td>
+                <td><span class="row-label">ZipCode:</span> {{ user.zipCode }}</td>
+                <td><span class="row-label">City:</span> {{ user.city }}</td>
+            </tr>
         </table>
+        
     </mat-card-content>
     <mat-card-content class="no-users-info" *ngIf="!allUsers || allUsers.length === 0">
         <h2>No users found.</h2>
