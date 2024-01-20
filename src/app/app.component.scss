@@ -12,13 +12,7 @@
     flex-direction: column;
     height: 90dvh;
 
-    @media (max-width: 1000px) {
 
-        // Styles when the window width is below 1000px
-        &[opened="false"] {
-            width: 0;
-        }
-    }
 }
 
 
@@ -106,8 +100,8 @@ mat-toolbar {
     }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1130px) {
     .router-container {
-        padding: 16px 0;
+        padding: 1px 0;
     }
 }

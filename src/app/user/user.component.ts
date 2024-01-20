@@ -2,8 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddUserComponent } from '../dialog-add-user/dialog-add-user.component';
 import { collection, getFirestore, onSnapshot } from '@angular/fire/firestore';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable, Subject, map, takeUntil } from 'rxjs';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { Observable, Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-user',
@@ -21,8 +21,17 @@ export class UserComponent implements OnInit, OnDestroy {
   private destroy$: Subject<void> = new Subject<void>();
 
   constructor(public dialog: MatDialog, private breakpointObserver: BreakpointObserver) {
-    this.isSmallScreen$ = this.breakpointObserver.observe([Breakpoints.XSmall, Breakpoints.Small])
-      .pipe(map(result => result.matches));
+    // Set isSmall based on the initial screen size
+    this.isSmall = this.breakpointObserver.isMatched('(max-width: 850px)');
+
+    // Watch for changes in screen size
+    this.breakpointObserver.observe(['(max-width: 850px)'])
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(result => {
+        this.isSmall = result.matches;
+        console.log('Is Small Screen:', this.isSmall);
+        // Handle any logic based on screen size changes here
+      });
   }
 
   ngOnInit() {
@@ -36,13 +45,6 @@ export class UserComponent implements OnInit, OnDestroy {
         this.allUsers.push(userData);
       });
       this.timeStampIntoDate();
-    });
-
-    // Subscribe to changes in screen size
-    this.isSmallScreen$.pipe(takeUntil(this.destroy$)).subscribe((isSmall) => {
-      console.log('Is Small Screen:', isSmall);
-      this.isSmall = isSmall
-      // Handle any logic based on screen size changes here
     });
   }
 
