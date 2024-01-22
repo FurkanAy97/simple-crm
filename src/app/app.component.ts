@@ -54,7 +54,7 @@ export class AppComponent implements OnDestroy {
         this.isSmallScreen = this.isSmallScreenCheck();
       }
 
-      if (event.url === '/dashboard' && !this.isSmallScreen) {
+      if (event.url === '/dashboard' || event.url === '/user' || event.url === '/products' && !this.isSmallScreen) {
         this.openDrawer();
       }
 
