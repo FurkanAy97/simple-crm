@@ -18,7 +18,6 @@ export class UserService {
     return new Promise(async (resolve) => {
       let knownState = localStorage.getItem('isKnown');
       if (knownState !== 'true') {
-        console.log('User is not known');
         await this.uploadExampleUsersToFirebase();
       }
       resolve();
@@ -30,16 +29,11 @@ export class UserService {
     try {
       const userCollection = collection(this.firestore, 'users');
       this.loading = true
-      console.log(this.loading);
-
       await this.clearCollection(this.firestore, userCollection);
-
       for (const user of this.exampleUsers.usersArray) {
         await setDoc(doc(userCollection), user);
       }
-      console.log('Example products uploaded to Firebase.');
       this.loading = false
-      console.log(this.loading);
     } catch (error) {
       console.error('Error uploading example products to Firebase:', error);
     }
@@ -51,8 +45,6 @@ export class UserService {
     querySnapshot.forEach((doc) => {
       deleteDoc(doc.ref);
     });
-
-    console.log('Collection cleared.');
   }
 
   async downloadUsers() {
@@ -64,7 +56,7 @@ export class UserService {
         const userData = doc.data();
         this.allUsers.push(userData);
       })
-      
+
     } catch (error) {
       console.error('Error getting documents: ', error);
     }

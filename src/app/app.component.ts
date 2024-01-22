@@ -35,7 +35,7 @@ export class AppComponent implements OnDestroy {
     const aCollection = collection(this.firestore, 'items');
     this.items$ = collectionData(aCollection);
 
-    // Subscribe to changes in screen size using BreakpointObserver
+
     this.breakpointObserver.observe([Breakpoints.Handset, Breakpoints.Tablet])
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(result => {
@@ -43,7 +43,7 @@ export class AppComponent implements OnDestroy {
         this.drawerMode = this.calculateDrawerMode();
       });
 
-    // Subscribe to route changes and close the drawer on NavigationEnd
+
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
       takeUntil(this.ngUnsubscribe)
@@ -72,7 +72,6 @@ export class AppComponent implements OnDestroy {
   }
 
   private isSmallScreenCheck(): boolean {
-    // Check if the route path is empty (root path)
     return this.router.url !== '/' && window.innerWidth < 1000;
   }
 

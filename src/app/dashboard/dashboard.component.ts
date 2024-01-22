@@ -10,7 +10,6 @@ export class DashboardComponent implements AfterViewInit {
   @ViewChild(SalesChartComponent) salesChartComponent!: SalesChartComponent;
 
   ngAfterViewInit() {
-    // Trigger the chart initialization when needed
     if (this.salesChartComponent) {
       this.salesChartComponent.initializeChart();
     }

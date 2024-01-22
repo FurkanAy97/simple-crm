@@ -17,6 +17,5 @@ export class BestProductComponent {
     await this.productService.downloadProducts(); 
     this.topProduct = this.productService.getBestProduct();
     this.totalRevenue = this.productService.getRevenue()
-    console.log(this.topProduct);
   }
 }

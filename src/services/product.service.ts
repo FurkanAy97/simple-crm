@@ -81,7 +81,6 @@ export class ProductService {
     return new Promise(async (resolve) => {
       let knownState = localStorage.getItem('isKnown');
       if (knownState !== 'true') {
-        console.log('User is not known');
         await this.uploadExampleProductsToFirebase();
       }
       resolve();
@@ -91,7 +90,6 @@ export class ProductService {
   saveKnownState() {
     localStorage.setItem('isKnown', 'true');
     this.isKnown = true
-    console.log('Saved isKnown state to localStorage.');
   }
 
   async uploadExampleProductsToFirebase() {
@@ -99,16 +97,13 @@ export class ProductService {
     try {
       const productsCollection = collection(this.db, 'products');
       this.loading = true
-      console.log(this.loading);
 
       await this.clearCollection(this.db, productsCollection);
 
       for (const product of this.allExampleProducts) {
         await setDoc(doc(productsCollection, product.id.toString()), product);
       }
-      console.log('Example products uploaded to Firebase.');
       this.loading = false
-      console.log(this.loading);
     } catch (error) {
       console.error('Error uploading example products to Firebase:', error);
     }
@@ -121,7 +116,6 @@ export class ProductService {
       deleteDoc(doc.ref);
     });
 
-    console.log('Collection cleared.');
   }
 
   async downloadProducts() {
@@ -152,10 +146,9 @@ export class ProductService {
       const productWithHighestSales = this.allProducts.reduce((maxSalesProduct, currentProduct) => {
         return currentProduct.sales > maxSalesProduct.sales ? currentProduct : maxSalesProduct;
       });
-      console.log("Produkt mit den höchsten Verkaufszahlen:", productWithHighestSales.name);
       return productWithHighestSales.name
     } else {
-      console.log("Kein Produkt gefunden.");
+      console.error("Kein Produkt gefunden.");
     }
   }
 

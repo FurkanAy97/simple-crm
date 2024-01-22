@@ -31,15 +31,14 @@ export class SignUpComponent {
     if (this.password.length > 5) {
       this.authService.signUpWithEmailAndPassword(this.email, this.password, this.firstName, this.lastName)
         .then((user) => {
-          console.log('User signed up:', user);
           this.emptyFields()
           this.snackBar.open('You have successfully signed up.', 'Close', {
-            duration: 3000, // 3 seconds
+            duration: 3000,
           });
         })
     } else {
       this.snackBar.open('Password should be at least 6 characters', 'Close', {
-        duration: 4000, // 3 seconds
+        duration: 4000,
       });
       this.password = ''
     }

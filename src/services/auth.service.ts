@@ -70,7 +70,6 @@ export class AuthService {
       const user = userCredential.user;
       this.isLoggedIn = true;
       this.saveAuthState();
-      console.log('Logged in user:', user);
       return user;
     } catch (error) {
       const errorCode = error.code;

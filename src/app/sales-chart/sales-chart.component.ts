@@ -22,7 +22,6 @@ export class SalesChartComponent {
         await this.getSales();
     
         const allProducts = this.productService.getProducts();
-        console.log(this.salesNumbers);
     
         let myChart = new Chart("myChart", {
             type: 'bar',
@@ -64,8 +63,8 @@ export class SalesChartComponent {
                         beginAtZero: true
                     }
                 },
-                responsive: true, // Make the chart responsive
-                maintainAspectRatio: false, // Maintain the aspect ratio
+                responsive: true,
+                maintainAspectRatio: false,
             }
         });
     

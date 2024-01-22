@@ -21,16 +21,12 @@ export class UserComponent implements OnInit, OnDestroy {
   private destroy$: Subject<void> = new Subject<void>();
 
   constructor(public dialog: MatDialog, private breakpointObserver: BreakpointObserver) {
-    // Set isSmall based on the initial screen size
     this.isSmall = this.breakpointObserver.isMatched('(max-width: 850px)');
 
-    // Watch for changes in screen size
     this.breakpointObserver.observe(['(max-width: 850px)'])
       .pipe(takeUntil(this.destroy$))
       .subscribe(result => {
         this.isSmall = result.matches;
-        console.log('Is Small Screen:', this.isSmall);
-        // Handle any logic based on screen size changes here
       });
   }
 

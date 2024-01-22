@@ -71,7 +71,7 @@ import { CityChartComponent } from './city-chart/city-chart.component';
     MatMenuModule,
     MatProgressSpinnerModule,
     NgChartsModule,
-    // Remove the duplicate provideFirebaseApp instance
+
     provideFirebaseApp(() => initializeApp({
       "projectId": "simple-crm-be31e",
       "appId": "1:422824591526:web:9d875653e5134a49d37467",
@@ -80,7 +80,7 @@ import { CityChartComponent } from './city-chart/city-chart.component';
       "authDomain": "simple-crm-be31e.firebaseapp.com",
       "messagingSenderId": "422824591526"
     })),
-    // ... other providers
+
     provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth())
   ],

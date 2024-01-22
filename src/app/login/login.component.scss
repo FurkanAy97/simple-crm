@@ -42,16 +42,11 @@ mat-card-content {
 
 .signup-link a {
     color: #1976D2;
-    /* Use a color that matches your theme */
     text-decoration: underline;
-    /* Underline the link */
     cursor: pointer;
-    /* Show pointer cursor on hover */
     font-weight: bold;
-    /* Make the link text bold */
 }
 
 .signup-link a:hover {
     color: #1565C0;
-    /* Change color on hover */
 }

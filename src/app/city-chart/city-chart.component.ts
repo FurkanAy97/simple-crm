@@ -28,7 +28,6 @@ export class CityChartComponent implements AfterViewInit {
     this.userCities.forEach(city => {
       this.cityCounts[city] = (this.cityCounts[city] || 0) + 1;
     });
-    console.log(this.cityCounts);
   }
 
   async ngAfterViewInit() {
@@ -68,7 +67,6 @@ export class CityChartComponent implements AfterViewInit {
 
   extractCities() {
     this.userCities = this.allUsers.map(user => user.city);
-    console.log(this.userCities);
   }
 
   initializeChart() {
@@ -115,8 +113,8 @@ export class CityChartComponent implements AfterViewInit {
             beginAtZero: true
           }
         },
-        responsive: true, // Make the chart responsive
-        maintainAspectRatio: false, // Maintain the aspect ratio
+        responsive: true,
+        maintainAspectRatio: false,
       }
     });
   }
