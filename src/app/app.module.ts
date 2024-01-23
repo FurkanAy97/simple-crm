@@ -37,6 +37,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { DialogAddProductComponent } from './dialog-add-product/dialog-add-product.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { CityChartComponent } from './city-chart/city-chart.component';
+import { LegalNoticeComponent } from './legal-notice/legal-notice.component';
 
 
 
@@ -49,7 +50,7 @@ import { CityChartComponent } from './city-chart/city-chart.component';
 
 
 @NgModule({
-  declarations: [AppComponent, DashboardComponent, UserComponent, DialogAddUserComponent, UserDetailComponent, DialogEditAddressComponent, DialogEditUserComponent, SalesChartComponent, ProductsComponent, BestProductComponent, LoginComponent, SignUpComponent, DialogAddProductComponent, CityChartComponent],
+  declarations: [AppComponent, DashboardComponent, UserComponent, DialogAddUserComponent, UserDetailComponent, DialogEditAddressComponent, DialogEditUserComponent, SalesChartComponent, ProductsComponent, BestProductComponent, LoginComponent, SignUpComponent, DialogAddProductComponent, CityChartComponent, LegalNoticeComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
