@@ -8,10 +8,9 @@ import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { LegalNoticeComponent } from './legal-notice/legal-notice.component';
 
-
 const routes: Routes = [
   { path: '', component: LoginComponent, pathMatch: 'full' },
-  { path: 'signup', component: SignUpComponent,},
+  { path: 'signup', component: SignUpComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'user', component: UserComponent },
   { path: 'user/:id', component: UserDetailComponent },
@@ -19,9 +18,8 @@ const routes: Routes = [
   { path: 'legal-notice', component: LegalNoticeComponent },
 ];
 
-
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { useHash: true })], // Set useHash to true
   exports: [RouterModule]
 })
 export class AppRoutingModule {}

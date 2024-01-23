@@ -64,12 +64,12 @@ export class LoginComponent implements OnInit {
         });
         this.router.navigate(['/dashboard']);
         this.productService.saveKnownState();
-        location.reload();
-      })
+      });
     } catch (error) {
       console.error('Error during guest login:', error);
     }
   }
+  
 
 }
 
