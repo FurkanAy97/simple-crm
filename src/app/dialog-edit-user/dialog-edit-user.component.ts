@@ -10,28 +10,30 @@ import { doc, getFirestore, updateDoc } from 'firebase/firestore';
 export class DialogEditUserComponent {
   loading: boolean = false;
   user: any;
-  birthDate: any;
+  birthDate: Date; // Ensure birthDate is of type Date
   userID: any;
   firestore = getFirestore();
+  maxDate: Date = new Date();
 
   constructor(public dialogRef: MatDialogRef<DialogEditUserComponent>) {
+    this.maxDate.setHours(0, 0, 0, 0);
   }
+
   async saveUser() {
     this.loading = true;
+    console.log(this.user);
+    console.log(this.user.birthDate);
+    
+    await this.timeStampIntoDate();
+    console.log(this.user.birthDate);
 
     try {
-      let formattedDate = this.birthDate.toLocaleDateString('en-GB', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric'
-      });
       await updateDoc(doc(this.firestore, "users", this.userID), {
         firstName: this.user.firstName,
         lastName: this.user.lastName,
         email: this.user.email,
-        birthDate: formattedDate
+        birthDate: this.user.birthDate
       });
-      debugger
     } catch (error) {
       console.error("Error updating user:", error);
     } finally {
@@ -40,4 +42,11 @@ export class DialogEditUserComponent {
     }
   }
 
+  async timeStampIntoDate() {
+    if (this.birthDate instanceof Date && !isNaN(this.birthDate.getTime())) {
+      // Format the date as 'YYYY-MM-DD'
+      let formattedDate = this.birthDate.toISOString().split('T')[0];
+      this.user.birthDate = formattedDate;
+    }
+  }
 }
