@@ -20,12 +20,18 @@ export class DialogEditUserComponent {
     this.loading = true;
 
     try {
+      let formattedDate = this.birthDate.toLocaleDateString('en-GB', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+      });
       await updateDoc(doc(this.firestore, "users", this.userID), {
         firstName: this.user.firstName,
         lastName: this.user.lastName,
         email: this.user.email,
-        birthDate: this.user.birthDate
+        birthDate: formattedDate
       });
+      debugger
     } catch (error) {
       console.error("Error updating user:", error);
     } finally {
