@@ -50,27 +50,24 @@ export class LoginComponent implements OnInit {
         });
       }
     }
-    
+
   }
-  
-  
+
+
   async handleGuestLogin() {
     await this.productService.checkIfKnownUser();
     await this.userService.checkIfKnownUser();
     try {
-      await this.authService.guestLogin().then(() => {
-        this.snackBar.open('You have successfully logged in as a Guest.', 'Close', {
-          duration: 3000,
-        });
-        this.router.navigate(['/dashboard']);
-        this.productService.saveKnownState();
+      await this.authService.guestLogin()
+      this.snackBar.open('You have successfully logged in as a Guest.', 'Close', {
+        duration: 3000,
       });
+      this.router.navigate(['/dashboard']);
+      this.productService.saveKnownState();
     } catch (error) {
       console.error('Error during guest login:', error);
     }
   }
-  
-
 }
 
 

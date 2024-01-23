@@ -53,7 +53,7 @@ export class AuthService {
       });
       this.newCreatedEmail = user.email;
       this.isLoggedIn = true;
-      this.saveAuthState(); 
+      this.saveAuthState();
       this.router.navigate(['/']);
       return user;
     } catch (error) {
@@ -78,11 +78,17 @@ export class AuthService {
     }
   }
 
-  public async guestLogin() {
-    this.isLoggedIn = true;
-    this.isLoggedInAsGuest = true;
-    this.saveAuthState();
+  public async guestLogin(): Promise<void> {
+    try {
+      this.isLoggedIn = true;
+      this.isLoggedInAsGuest = true;
+      this.saveAuthState();
+    } catch (error) {
+      console.error('Error during guest login:', error);
+      throw error;
+    }
   }
+
 
   public logout(): void {
     this.isLoggedIn = false;

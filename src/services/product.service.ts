@@ -97,9 +97,7 @@ export class ProductService {
     try {
       const productsCollection = collection(this.db, 'products');
       this.loading = true
-
       await this.clearCollection(this.db, productsCollection);
-
       for (const product of this.allExampleProducts) {
         await setDoc(doc(productsCollection, product.id.toString()), product);
       }
