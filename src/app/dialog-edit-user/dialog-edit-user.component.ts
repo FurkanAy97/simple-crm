@@ -21,11 +21,7 @@ export class DialogEditUserComponent {
 
   async saveUser() {
     this.loading = true;
-    console.log(this.user);
-    console.log(this.user.birthDate);
-    
     await this.timeStampIntoDate();
-    console.log(this.user.birthDate);
 
     try {
       await updateDoc(doc(this.firestore, "users", this.userID), {

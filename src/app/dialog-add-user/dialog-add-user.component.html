@@ -11,12 +11,18 @@
             <input [disabled]="loading" required [(ngModel)]='user.lastName' matInput placeholder="Furkan">
         </mat-form-field>
     </div>
+    <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
     <div class="email-container">
         <mat-form-field appearance="outline" class="full-width">
             <mat-label>E-Mail</mat-label>
-            <input [disabled]="loading" required name="email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}" [(ngModel)]='user.email' matInput type="email" placeholder="email">
+            <input [disabled]="loading" required name="email" [(ngModel)]='user.email' matInput type="email"
+                placeholder="email">
         </mat-form-field>
+
+        <div *ngIf="emailInvalid" class="error-message">Invalid email address</div>
     </div>
+
+
     <div class="form-date-container">
         <mat-form-field appearance="outline" class="full-width">
             <mat-label>Birth Date</mat-label>
@@ -36,7 +42,8 @@
     <div class="form-adress-container">
         <mat-form-field appearance="outline">
             <mat-label>ZIP code</mat-label>
-            <input [disabled]="loading" required type="number" [(ngModel)]='user.zipCode' matInput placeholder="ZIP code">
+            <input [disabled]="loading" required type="number" [(ngModel)]='user.zipCode' matInput
+                placeholder="ZIP code">
         </mat-form-field>
         <mat-form-field appearance="outline">
             <mat-label>City</mat-label>
@@ -46,6 +53,7 @@
 
     <div mat-dialog-actions>
         <button [disabled]="loading" mat-button (click)="dialogRef.close()">Cancel</button>
-        <button [disabled]="loading" mat-button cdkFocusInitial (click)="saveUser()">Save</button>
+        <button [disabled]="loading || emailInvalid" mat-button cdkFocusInitial (click)="saveUser()">Save</button>
     </div>
+
 </div>
