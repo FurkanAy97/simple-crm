@@ -1,59 +1,61 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/services/auth.service';
-import { trigger, state, style, animate, transition } from '@angular/animations';
+import { FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss'],
-  animations: [
-    trigger('fadeInOut', [
-      state('void', style({
-        opacity: 0
-      })),
-      transition('void <=> *', animate(300)),
-    ]),
-  ],
 })
-export class SignUpComponent {
-
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-  passwordError: string | null = null;
-  isPasswordTooShort: boolean = false;
+export class SignUpComponent implements OnInit {
+  firstName = new FormControl('', [Validators.required]);
+  lastName = new FormControl('', [Validators.required]);
+  email = new FormControl('', [Validators.required, Validators.email]);
+  password = new FormControl('', [Validators.required, Validators.minLength(6)]);
 
   constructor(private authService: AuthService, private snackBar: MatSnackBar) {}
 
+  ngOnInit() {
+    this.email.setValue(this.authService.newCreatedEmail);
+  }
+
   signUp() {
-    if (this.password.length > 5) {
-      this.authService.signUpWithEmailAndPassword(this.email, this.password, this.firstName, this.lastName)
+    if (this.password.valid) {
+      this.authService
+        .signUpWithEmailAndPassword(
+          this.email.value,
+          this.password.value,
+          this.firstName.value,
+          this.lastName.value
+        )
         .then((user) => {
-          this.emptyFields()
+          this.emptyFields();
           this.snackBar.open('You have successfully signed up.', 'Close', {
             duration: 3000,
           });
-        })
+        });
     } else {
       this.snackBar.open('Password should be at least 6 characters', 'Close', {
         duration: 4000,
       });
-      this.password = ''
+      this.password.setValue('');
     }
   }
 
-  
-  ngOnInit() {
-    this.email = this.authService.newCreatedEmail;
-  }
-
-
   emptyFields() {
-    this.firstName = ''
-    this.lastName = ''
-    this.email = ''
-    this.password = ''
+    this.firstName.setValue('');
+    this.lastName.setValue('');
+    this.email.setValue('');
+    this.password.setValue('');
   }
+
+  getErrorMessage(control: FormControl) {
+    if (control.hasError('required')) {
+      return 'This field is required.';
+    }
+  
+    return control.hasError('email') ? 'Please enter a valid email address.' : '';
+  }
+  
 }

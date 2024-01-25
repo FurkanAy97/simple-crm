@@ -1,47 +1,42 @@
 <div class="signup-container">
   <mat-card class="signup-card">
     <mat-card-content>
-      <form (ngSubmit)="signUp()" #form="ngForm" autocomplete="off" class="form signup-form">
+      <form (ngSubmit)="signUp()" autocomplete="off" class="form signup-form">
         <h1>Sign Up</h1>
 
         <div class="form-group">
           <mat-form-field appearance="outline">
             <mat-label>First Name</mat-label>
-            <input matInput placeholder="First Name" type="text" ngModel name="firstName" required
-              [(ngModel)]="firstName">
-            <mat-icon matSuffix>person</mat-icon>
+            <input matInput placeholder="First Name" type="text" [formControl]="firstName">
+            <mat-error *ngIf="firstName.invalid">{{ getErrorMessage(firstName) }}</mat-error>
           </mat-form-field>
         </div>
 
         <div class="form-group">
           <mat-form-field appearance="outline">
             <mat-label>Last Name</mat-label>
-            <input matInput placeholder="Last Name" type="text" ngModel name="lastName" required [(ngModel)]="lastName">
-            <mat-icon matSuffix>person</mat-icon>
+            <input matInput placeholder="Last Name" type="text" [formControl]="lastName">
+            <mat-error *ngIf="lastName.invalid">{{ getErrorMessage(lastName) }}</mat-error>
           </mat-form-field>
         </div>
 
         <div class="form-group">
           <mat-form-field appearance="outline">
             <mat-label>Email</mat-label>
-            <input matInput placeholder="Email" type="email" ngModel name="email" required
-              pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" [(ngModel)]="email" autocomplete="on">
-            <mat-icon matSuffix>email</mat-icon>
+            <input matInput placeholder="Email" type="email" [formControl]="email">
+            <mat-error *ngIf="email.invalid">{{ getErrorMessage(email) }}</mat-error>
           </mat-form-field>
         </div>
-
 
         <div class="form-group">
           <mat-form-field appearance="outline">
             <mat-label>Password</mat-label>
-            <input matInput placeholder="Password" type="password" ngModel name="password" required
-              [(ngModel)]="password" #passwordInput="ngModel">
-            <mat-hint *ngIf="isPasswordTooShort" [@fadeInOut]>Password should be at least 6 characters</mat-hint>
-            <mat-icon matSuffix>password</mat-icon>
+            <input matInput placeholder="Password" type="password" [formControl]="password">
+            <mat-error *ngIf="password.invalid">Password should be at least 6 characters</mat-error>
           </mat-form-field>
         </div>
 
-        <button type="submit" [disabled]="!form.valid" mat-raised-button color="primary">Sign Up</button>
+        <button type="submit" [disabled]="!password.valid" mat-raised-button color="primary">Sign Up</button>
       </form>
 
       <div class="login-link">

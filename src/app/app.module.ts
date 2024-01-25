@@ -38,6 +38,7 @@ import { DialogAddProductComponent } from './dialog-add-product/dialog-add-produ
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CityChartComponent } from './city-chart/city-chart.component';
 import { LegalNoticeComponent } from './legal-notice/legal-notice.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -50,7 +51,7 @@ import { LegalNoticeComponent } from './legal-notice/legal-notice.component';
     MatIconModule,
     MatSidenavModule,
     MatFormFieldModule,
-    MatDatepickerModule,
+    MatDatepickerModule,ReactiveFormsModule,
     MatButtonModule,
     MatSnackBarModule,
     MatTooltipModule,
