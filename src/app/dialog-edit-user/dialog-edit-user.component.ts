@@ -12,12 +12,12 @@ export class DialogEditUserComponent implements OnInit {
   loading: boolean = false;
   user: any = { firstName: '', lastName: '', email: '', birthDate: null }; // Add this line
   userForm: FormGroup;
-  maxDate: Date = new Date();
+  maxBirthDate: Date = new Date();
   userID: any;
   firestore = getFirestore();
 
   constructor(public dialogRef: MatDialogRef<DialogEditUserComponent>, private fb: FormBuilder) {
-    this.maxDate.setHours(0, 0, 0, 0);
+  
   }
 
   ngOnInit() {

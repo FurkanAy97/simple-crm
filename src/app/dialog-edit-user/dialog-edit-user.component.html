@@ -38,7 +38,7 @@
     <div class="form-date-container">
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Birth Date</mat-label>
-        <input [disabled]="loading" formControlName="birthDate" matInput [matDatepicker]="picker" [max]="maxDate">
+        <input [disabled]="loading" formControlName="birthDate" matInput [matDatepicker]="picker" [max]="maxBirthDate">
         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
         <mat-error *ngIf="userForm.get('birthDate').hasError('required')">

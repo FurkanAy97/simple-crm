@@ -17,6 +17,7 @@ export class DialogAddUserComponent {
   birthDate: Date | null = null;
   firestore: Firestore = inject(Firestore)
   loading: boolean = false
+  maxBirthDate: Date = new Date();
 
   constructor(public dialogRef: MatDialogRef<DialogAddUserComponent>, private snackBar: MatSnackBar) {
 
