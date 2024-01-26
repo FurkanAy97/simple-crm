@@ -1,23 +1,44 @@
 <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
-<h1 mat-dialog-title>Add Product </h1>
-<div mat-dialog-content class="product-container">
+
+<h1 mat-dialog-title>Add Product</h1>
+
+<form [formGroup]="productForm">
+  <div mat-dialog-content class="product-container">
     <div class="form-product-container">
-        <mat-form-field appearance="outline">
-            <mat-label>Productname</mat-label>
-            <input [disabled]="loading" [(ngModel)]='productname' matInput>
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-            <mat-label>Price</mat-label>
-            <input [disabled]="loading" type="number" [(ngModel)]='productPrice' matInput>
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-            <mat-label>Sales</mat-label>
-            <input [disabled]="loading" type="number" [(ngModel)]='productSales' matInput>
-        </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Productname</mat-label>
+        <input [disabled]="loading" formControlName="productname" matInput>
+        <mat-error *ngIf="productForm.get('productname').hasError('required')">
+          Please provide a product name.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Price</mat-label>
+        <input [disabled]="loading" type="number" formControlName="productPrice" matInput>
+        <mat-error *ngIf="productForm.get('productPrice').hasError('required')">
+          Please provide a price.
+        </mat-error>
+        <mat-error *ngIf="productForm.get('productPrice').hasError('min')">
+          Price must be a positive number.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Sales</mat-label>
+        <input [disabled]="loading" type="number" formControlName="productSales" matInput>
+        <mat-error *ngIf="productForm.get('productSales').hasError('required')">
+          Please provide sales.
+        </mat-error>
+        <mat-error *ngIf="productForm.get('productSales').hasError('min')">
+          Sales must be a positive number.
+        </mat-error>
+      </mat-form-field>
     </div>
- 
+
     <div mat-dialog-actions>
-        <button [disabled]="loading" mat-button (click)="dialogRef.close()">Cancel</button>
-        <button [disabled]="loading" mat-button cdkFocusInitial (click)="saveProduct()">Save</button>
+      <button [disabled]="loading" mat-button (click)="dialogRef.close()">Cancel</button>
+      <button [disabled]="loading" mat-button cdkFocusInitial (click)="saveProduct()">Save</button>
     </div>
-</div>
+  </div>
+</form>

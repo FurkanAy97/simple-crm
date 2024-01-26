@@ -1,9 +1,10 @@
+// Import necessary modules
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { doc, setDoc, getFirestore } from 'firebase/firestore';
-import { DialogEditUserComponent } from '../dialog-edit-user/dialog-edit-user.component';
-import { ProductService } from 'src/services/product.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { doc, setDoc, getFirestore } from 'firebase/firestore';
+import { ProductService } from 'src/services/product.service';
 
 @Component({
   selector: 'app-dialog-add-product',
@@ -12,29 +13,43 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class DialogAddProductComponent {
   loading: boolean = false;
-  productname: string = '';
-  productPrice: number = 0;
-  productSales: number = 0;
+  productForm: FormGroup;
 
   firestore = getFirestore();
 
   constructor(
-    public dialogRef: MatDialogRef<DialogEditUserComponent>,
+    public dialogRef: MatDialogRef<DialogAddProductComponent>,
     private productService: ProductService,
     private snackBar: MatSnackBar,
-  ) {}
+    private fb: FormBuilder,
+  ) {
+    // Create a reactive form
+    this.productForm = this.fb.group({
+      productname: ['', Validators.required],
+      productPrice: [0, [Validators.required, Validators.min(0)]],
+      productSales: [0, [Validators.required, Validators.min(0)]],
+    });
+  }
 
   async saveProduct() {
     try {
       this.loading = true;
+
+      // Check if the form is valid
+      if (this.productForm.invalid) {
+        throw new Error('Please fill all required information.');
+      }
+
+      // Use form values
       const newProduct = {
-        name: this.productname,
-        price: this.productPrice,
+        name: this.productForm.value.productname,
+        price: this.productForm.value.productPrice,
         id: this.productService.allProducts.length,
-        sales: this.productSales
+        sales: this.productForm.value.productSales
       };
 
-      if (!this.isValidNumber(this.productPrice) || !this.isValidNumber(this.productSales)) {
+      // Validate numbers
+      if (!this.isValidNumber(newProduct.price) || !this.isValidNumber(newProduct.sales)) {
         throw new Error('Product price and sales must be positive numbers.');
       }
 
@@ -43,9 +58,9 @@ export class DialogAddProductComponent {
 
       this.productService.allProducts.push(newProduct);
 
-      this.productname = '';
-      this.productPrice = 0;
-      this.productSales = 0;
+      // Reset the form fields
+      this.productForm.reset();
+
       this.dialogRef.close();
     } catch (error) {
       this.snackBar.open(error.message || 'Please fill all information.', 'Close', {
@@ -54,10 +69,6 @@ export class DialogAddProductComponent {
     } finally {
       this.loading = false;
     }
-  }
-
-  isValidProduct(product: any): boolean {
-    return product.name && this.isValidNumber(product.price) && this.isValidNumber(product.sales);
   }
 
   isValidNumber(value: any): boolean {

@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { doc, getFirestore, updateDoc } from 'firebase/firestore';
 
 @Component({
@@ -7,16 +8,29 @@ import { doc, getFirestore, updateDoc } from 'firebase/firestore';
   templateUrl: './dialog-edit-user.component.html',
   styleUrls: ['./dialog-edit-user.component.scss']
 })
-export class DialogEditUserComponent {
+export class DialogEditUserComponent implements OnInit {
   loading: boolean = false;
-  user: any;
-  birthDate: Date;
+  user: any = { firstName: '', lastName: '', email: '', birthDate: null }; // Add this line
+  userForm: FormGroup;
+  maxDate: Date = new Date();
   userID: any;
   firestore = getFirestore();
-  maxDate: Date = new Date();
 
-  constructor(public dialogRef: MatDialogRef<DialogEditUserComponent>) {
+  constructor(public dialogRef: MatDialogRef<DialogEditUserComponent>, private fb: FormBuilder) {
     this.maxDate.setHours(0, 0, 0, 0);
+  }
+
+  ngOnInit() {
+    this.initForm();
+  }
+
+  initForm() {
+    this.userForm = this.fb.group({
+      firstName: [this.user.firstName, Validators.required],
+      lastName: [this.user.lastName, Validators.required],
+      email: [this.user.email, [Validators.required, Validators.email]],
+      birthDate: [this.user.birthDate, Validators.required],
+    });
   }
 
   async saveUser() {
@@ -24,12 +38,16 @@ export class DialogEditUserComponent {
     await this.timeStampIntoDate();
 
     try {
-      await updateDoc(doc(this.firestore, "users", this.userID), {
-        firstName: this.user.firstName,
-        lastName: this.user.lastName,
-        email: this.user.email,
-        birthDate: this.user.birthDate
-      });
+      if (this.userForm.valid) {
+        const formData = this.userForm.value;
+
+        await updateDoc(doc(this.firestore, "users", this.userID), {
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email,
+          birthDate: formData.birthDate,
+        });
+      }
     } catch (error) {
       console.error("Error updating user:", error);
     } finally {
@@ -39,9 +57,9 @@ export class DialogEditUserComponent {
   }
 
   async timeStampIntoDate() {
-    if (this.birthDate instanceof Date && !isNaN(this.birthDate.getTime())) {
-      let formattedDate = this.birthDate.toISOString().split('T')[0];
-      this.user.birthDate = formattedDate;
+    if (this.userForm.get('birthDate').value instanceof Date && !isNaN(this.userForm.get('birthDate').value.getTime())) {
+      const formattedDate = this.userForm.get('birthDate').value.toISOString().split('T')[0];
+      this.userForm.get('birthDate').setValue(formattedDate);
     }
   }
 }
