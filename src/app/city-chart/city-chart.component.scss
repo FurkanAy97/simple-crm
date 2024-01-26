@@ -4,9 +4,14 @@
     display: block;
     height: 40dvh;
     margin-bottom: 20px;
-    padding: 8px;
+    padding: 38px;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+
+    h1{
+        font-weight: bold;
+    }
 }
