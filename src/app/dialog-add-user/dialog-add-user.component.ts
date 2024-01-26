@@ -14,7 +14,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class DialogAddUserComponent {
 
   user = new User();
-  birthDate: any;
+  birthDate: Date | null = null;
   firestore: Firestore = inject(Firestore)
   loading: boolean = false
 
@@ -31,18 +31,24 @@ export class DialogAddUserComponent {
   async saveUser() {
     this.loading = true;
     try {
-      if (this.isValidEmail()) {
-        this.user.birthDate = this.birthDate.getTime();
-        const userRef = await addDoc(collection(this.firestore, 'users'), JSON.parse(JSON.stringify(this.user)));
-        this.emptyFields()
-        this.dialogRef.close()
+      if (this.areAllFieldsFilled()) {
+        if (this.isValidEmail()) {
+          this.user.birthDate = this.birthDate?.getTime() || null;
+          const userRef = await addDoc(collection(this.firestore, 'users'), JSON.parse(JSON.stringify(this.user)));
+          this.emptyFields();
+          this.dialogRef.close();
+        } else {
+          this.snackBar.open('Please enter a correct email address.', 'Close', {
+            duration: 3000,
+          });
+        }
       } else {
-        this.snackBar.open('Please enter a correct email adress.', 'Close', {
+        this.snackBar.open('Please fill all required information.', 'Close', {
           duration: 3000,
         });
       }
     } catch (error) {
-      this.snackBar.open('Please fill all information.', 'Close', {
+      this.snackBar.open('An error occurred. Please try again.', 'Close', {
         duration: 3000,
       });
     } finally {
@@ -50,14 +56,29 @@ export class DialogAddUserComponent {
     }
   }
 
+  areAllFieldsFilled(): boolean {
+    return (
+      !!this.user.firstName &&
+      !!this.user.lastName &&
+      !!this.user.email &&
+      !!this.birthDate &&
+      !!this.user.street &&
+      this.user.zipCode !== undefined &&
+      !!this.user.city
+    );
+  }
+
+
+
   emptyFields() {
     this.user.firstName = '';
     this.user.lastName = '';
     this.user.email = '';
-    this.birthDate = '';
+    this.birthDate = null;
     this.user.street = '';
     this.user.zipCode = undefined;
     this.user.city = '';
   }
+
 
 }

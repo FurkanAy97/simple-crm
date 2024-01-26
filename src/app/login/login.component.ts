@@ -25,7 +25,6 @@ export class LoginComponent implements OnInit {
   async ngOnInit() {
     if (this.authService.newCreatedEmail) {
       await this.authService.loginWithEmailAndPassword(this.email.value, this.password.value)
-
     }
   }
 

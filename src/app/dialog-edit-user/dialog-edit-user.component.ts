@@ -10,7 +10,7 @@ import { doc, getFirestore, updateDoc } from 'firebase/firestore';
 export class DialogEditUserComponent {
   loading: boolean = false;
   user: any;
-  birthDate: Date; // Ensure birthDate is of type Date
+  birthDate: Date;
   userID: any;
   firestore = getFirestore();
   maxDate: Date = new Date();
@@ -40,7 +40,6 @@ export class DialogEditUserComponent {
 
   async timeStampIntoDate() {
     if (this.birthDate instanceof Date && !isNaN(this.birthDate.getTime())) {
-      // Format the date as 'YYYY-MM-DD'
       let formattedDate = this.birthDate.toISOString().split('T')[0];
       this.user.birthDate = formattedDate;
     }

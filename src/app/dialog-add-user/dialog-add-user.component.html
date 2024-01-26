@@ -4,11 +4,17 @@
     <div class="form-name-container">
         <mat-form-field appearance="outline">
             <mat-label>First name</mat-label>
-            <input [disabled]="loading" required [(ngModel)]='user.firstName' matInput placeholder="Furkan">
+            <input [disabled]="loading" required [(ngModel)]='user.firstName' matInput placeholder="First name">
+            <mat-error>
+                Please provide a name.
+            </mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline">
             <mat-label>Last name</mat-label>
-            <input [disabled]="loading" required [(ngModel)]='user.lastName' matInput placeholder="Furkan">
+            <input [disabled]="loading" required [(ngModel)]='user.lastName' matInput placeholder="Last name">
+            <mat-error>
+                Please provide a lastname.
+            </mat-error>
         </mat-form-field>
     </div>
     <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
@@ -17,8 +23,10 @@
             <mat-label>E-Mail</mat-label>
             <input [disabled]="loading" required name="email" [(ngModel)]='user.email' matInput type="email"
                 placeholder="email">
+            <mat-error>
+                Please provide a valid email.
+            </mat-error>
         </mat-form-field>
-
         <div *ngIf="emailInvalid" class="error-message">Invalid email address</div>
     </div>
 
@@ -27,6 +35,9 @@
         <mat-form-field appearance="outline" class="full-width">
             <mat-label>Birth Date</mat-label>
             <input [disabled]="loading" required [(ngModel)]='birthDate' matInput [matDatepicker]="picker">
+            <mat-error>
+                Please provide a birthdate.
+            </mat-error>
             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
@@ -36,6 +47,9 @@
         <mat-form-field appearance="outline" class="full-width">
             <mat-label>Street + House No.</mat-label>
             <input [disabled]="loading" required [(ngModel)]='user.street' matInput placeholder="Adress">
+            <mat-error>
+                Please provide Street + House No.
+            </mat-error>
         </mat-form-field>
     </div>
 
@@ -44,10 +58,16 @@
             <mat-label>ZIP code</mat-label>
             <input [disabled]="loading" required type="number" [(ngModel)]='user.zipCode' matInput
                 placeholder="ZIP code">
+            <mat-error>
+                Please provide a ZIP code.
+            </mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline">
             <mat-label>City</mat-label>
             <input [disabled]="loading" required [(ngModel)]='user.city' matInput placeholder="City Name">
+            <mat-error>
+                Please provide a City.
+            </mat-error>
         </mat-form-field>
     </div>
 

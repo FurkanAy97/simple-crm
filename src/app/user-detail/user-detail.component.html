@@ -2,6 +2,9 @@
     <button class="dot-btn" mat-icon-button [matMenuTriggerFor]="userMenu">
         <mat-icon>more_vert</mat-icon>
     </button>
+    <button mat-icon-button class="arrow-back" routerLink="/user">
+        <mat-icon>arrow_back</mat-icon>
+    </button>
     <mat-menu #userMenu="matMenu">
         <button mat-menu-item (click)="editUserDetail()">Edit</button>
     </mat-menu>
