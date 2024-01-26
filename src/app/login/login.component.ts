@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { ProductService } from 'src/services/product.service';
 import { UserService } from 'src/services/user.service';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -11,19 +12,20 @@ import { UserService } from 'src/services/user.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  email: string = '';
-  password: string = '';
-  isKnown: boolean = false;
 
+  isKnown: boolean = false;
+  email = new FormControl('', [Validators.required, Validators.email]);
+  password = new FormControl('', [Validators.required, Validators.minLength(6)]);
 
   constructor(private authService: AuthService, private snackBar: MatSnackBar, private router: Router, private productService: ProductService, private userService: UserService) {
     authService.isLoggedIn = false
   }
 
 
-  ngOnInit() {
+  async ngOnInit() {
     if (this.authService.newCreatedEmail) {
-      this.email = this.authService.newCreatedEmail;
+      await this.authService.loginWithEmailAndPassword(this.email.value, this.password.value)
+
     }
   }
 
@@ -32,7 +34,7 @@ export class LoginComponent implements OnInit {
     await this.productService.checkIfKnownUser();
     await this.userService.checkIfKnownUser();
     try {
-      await this.authService.loginWithEmailAndPassword(this.email, this.password).then(() => {
+      await this.authService.loginWithEmailAndPassword(this.email.value, this.password.value).then(() => {
         this.snackBar.open('You have successfully logged in.', 'Close', {
           duration: 3000,
         });
@@ -67,6 +69,23 @@ export class LoginComponent implements OnInit {
     } catch (error) {
       console.error('Error during guest login:', error);
     }
+  }
+
+  getErrorMessage(control: FormControl) {
+    if (control.hasError('required')) {
+      return 'This field is required.';
+    }
+  
+    if (control.hasError('email')) {
+      return 'Please enter a valid email address.';
+    }
+  
+    // Check if there are any numbers in the input
+    if (/^\D+$/.test(control.value)) {
+      return 'Numbers are not allowed in this field.';
+    }
+  
+    return '';
   }
 }
 

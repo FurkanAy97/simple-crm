@@ -55,7 +55,18 @@ export class SignUpComponent implements OnInit {
       return 'This field is required.';
     }
   
-    return control.hasError('email') ? 'Please enter a valid email address.' : '';
+    if (control.hasError('email')) {
+      return 'Please enter a valid email address.';
+    }
+  
+    // Check if there are any numbers in the input
+    if (/^\D+$/.test(control.value)) {
+      return 'Numbers are not allowed in this field.';
+    }
+  
+    return '';
   }
+  
+  
   
 }
