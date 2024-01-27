@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   isKnown: boolean = false;
   email = new FormControl('', [Validators.required, Validators.email]);
   password = new FormControl('', [Validators.required, Validators.minLength(6)]);
+  hidePassword = true;
 
   constructor(private authService: AuthService, private snackBar: MatSnackBar, private router: Router, private productService: ProductService, private userService: UserService) {
     authService.isLoggedIn = false
@@ -69,7 +70,9 @@ export class LoginComponent implements OnInit {
       console.error('Error during guest login:', error);
     }
   }
-
+  togglePasswordVisibility(): void {
+    this.hidePassword = !this.hidePassword;
+  }
   getErrorMessage(control: FormControl) {
     if (control.hasError('required')) {
       return 'This field is required.';
@@ -80,12 +83,13 @@ export class LoginComponent implements OnInit {
     }
   
     // Check if there are any numbers in the input
-    if (/^\D+$/.test(control.value)) {
+    if (/\d/.test(control.value)) {
       return 'Numbers are not allowed in this field.';
     }
   
     return '';
   }
+  
 }
 
 

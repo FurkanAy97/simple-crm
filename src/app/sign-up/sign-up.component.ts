@@ -13,6 +13,7 @@ export class SignUpComponent implements OnInit {
   lastName = new FormControl('', [Validators.required]);
   email = new FormControl('', [Validators.required, Validators.email]);
   password = new FormControl('', [Validators.required, Validators.minLength(6)]);
+  hidePassword = true;
 
   constructor(private authService: AuthService, private snackBar: MatSnackBar) {}
 
@@ -60,13 +61,15 @@ export class SignUpComponent implements OnInit {
     }
   
     // Check if there are any numbers in the input
-    if (/^\D+$/.test(control.value)) {
+    if (/\d/.test(control.value)) {
       return 'Numbers are not allowed in this field.';
     }
   
     return '';
   }
   
-  
+  togglePasswordVisibility(): void {
+    this.hidePassword = !this.hidePassword;
+  }
   
 }
