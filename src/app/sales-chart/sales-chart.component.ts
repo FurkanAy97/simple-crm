@@ -24,7 +24,7 @@ export class SalesChartComponent {
         const allProducts = this.productService.getProducts();
     
         let myChart = new Chart("myChart", {
-            type: 'bar',
+            type: 'polarArea',
             data: {
                 labels: this.productNames,
                 datasets: [{

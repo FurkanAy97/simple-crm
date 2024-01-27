@@ -2,8 +2,8 @@
     background-color: white;
     border-radius: 10px;
     display: block;
-    height: 40dvh;
-    padding: 38px;
+    height: 50dvh;
+    padding: 28px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -12,5 +12,13 @@
 
     h1{
         font-weight: bold;
+    }
+}
+
+
+@media (max-width: 1000px) {
+
+    #divChart {
+        height: 70dvh;
     }
 }
