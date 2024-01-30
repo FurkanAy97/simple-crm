@@ -1,29 +1,31 @@
-<h1 mat-dialog-title>Edit User</h1>
+<h1 mat-dialog-title>Edit Product</h1>
 <form [formGroup]="productForm">
     <div mat-dialog-content class="product-container">
         <div class="form-product-container">
             <mat-form-field appearance="outline">
                 <mat-label>Product name</mat-label>
-                <input formControlName="productname" matInput>
-                <mat-error>Please provide a product name.</mat-error>
+                <input [attr.disabled]="loading" formControlName="productname" matInput>
+                <mat-error *ngIf="productForm.get('productname').hasError('required')">Please provide a product name.</mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="outline">
                 <mat-label>Product price</mat-label>
-                <input type="number" formControlName="productprice" matInput>
-                <mat-error>Please provide a product price.</mat-error>
+                <input [attr.disabled]="loading" type="number" formControlName="productprice" matInput>
+                <mat-error *ngIf="productForm.get('productprice').hasError('required')">Please provide a product price.</mat-error>
+                <mat-error *ngIf="productForm.get('productprice').hasError('min')">Price must be a positive number.</mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="outline">
                 <mat-label>Product sales</mat-label>
-                <input type="number" formControlName="productsales" matInput>
-                <mat-error>Please provide a product sales.</mat-error>
+                <input [attr.disabled]="loading" type="number" formControlName="productsales" matInput>
+                <mat-error *ngIf="productForm.get('productsales').hasError('required')">Please provide product sales.</mat-error>
+                <mat-error *ngIf="productForm.get('productsales').hasError('min')">Sales must be a positive number.</mat-error>
             </mat-form-field>
         </div>
 
-        <div mat-dialog-actions>
-            <button [disabled]="loading" mat-button (click)="dialogRef.close()">Cancel</button>
-            <button [disabled]="loading" mat-button cdkFocusInitial (click)="saveProductEdit()">Save</button>
+        <div mat-dialog-actions class="mat-dialog-actions">
+            <button [attr.disabled]="loading" mat-button (click)="dialogRef.close()">Cancel</button>
+            <button [attr.disabled]="loading" mat-button cdkFocusInitial (click)="saveProductEdit()">Save</button>
         </div>
     </div>
 </form>

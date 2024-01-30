@@ -13,7 +13,7 @@ import { ProductService } from 'src/services/product.service';
 })
 export class DialogEditProductComponent {
   productForm: FormGroup;
-  loading: BooleanInput;
+  loading: Boolean = false;
 
   // Variables to store form values
   productName: string;
@@ -34,8 +34,8 @@ export class DialogEditProductComponent {
     // Initialize the form with data from the product or defaults
     this.productForm = this.fb.group({
       productname: [data.product ? data.product.name : '', Validators.required],
-      productprice: [data.product ? data.product.price : '', Validators.required],
-      productsales: [data.product ? data.product.sales : '', Validators.required],
+      productprice: [data.product ? data.product.price : '', [Validators.required, Validators.min(0)]],
+      productsales: [data.product ? data.product.sales : '', [Validators.required, Validators.min(0)]],
     });
 
     this.productName = this.productForm.get('productname').value;
@@ -45,6 +45,7 @@ export class DialogEditProductComponent {
     // Set the initial value for productID
     this.productID = this.data.product ? this.data.product.id : null;
 
+    console.log(this.productForm);
   }
 
   async saveProductEdit() {
@@ -66,6 +67,7 @@ export class DialogEditProductComponent {
 
       // Validate numbers
       if (!this.isValidNumber(updatedProduct.price) || !this.isValidNumber(updatedProduct.sales)) {
+        this.loading = false;
         throw new Error('Product price and sales must be positive numbers.');
       }
 
@@ -93,12 +95,14 @@ export class DialogEditProductComponent {
 
         this.dialogRef.close();
       } else {
+        this.loading = false;
         throw new Error('Product ID is undefined.');
       }
     } catch (error) {
       this.snackBar.open(error.message || 'Please fill all information.', 'Close', {
         duration: 3000,
       });
+      this.loading = false;
     } finally {
       this.loading = false;
     }
