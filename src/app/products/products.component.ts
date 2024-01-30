@@ -20,15 +20,14 @@ export class ProductsComponent {
     this.dialog.open(DialogAddProductComponent);
   }
 
-  openEditDialog(): void {
-    this.dialog.open(DialogEditProductComponent);
+  openEditDialog(product: any): void {
+    this.dialog.open(DialogEditProductComponent, {
+      data: { product: product } 
+    });
   }
-
-  
 
   private async initialize() {
     await this.productService.downloadProducts();
     this.allProducts = this.productService.allProducts;
   }
 }
-
