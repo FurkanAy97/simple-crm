@@ -39,10 +39,11 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CityChartComponent } from './city-chart/city-chart.component';
 import { LegalNoticeComponent } from './legal-notice/legal-notice.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DialogEditProductComponent } from './dialog-edit-product/dialog-edit-product.component';
 
 
 @NgModule({
-  declarations: [AppComponent, DashboardComponent, UserComponent, DialogAddUserComponent, UserDetailComponent, DialogEditAddressComponent, DialogEditUserComponent, SalesChartComponent, ProductsComponent, BestProductComponent, LoginComponent, SignUpComponent, DialogAddProductComponent, CityChartComponent, LegalNoticeComponent],
+  declarations: [AppComponent, DashboardComponent, UserComponent, DialogAddUserComponent, UserDetailComponent, DialogEditAddressComponent, DialogEditUserComponent, SalesChartComponent, ProductsComponent, BestProductComponent, LoginComponent, SignUpComponent, DialogAddProductComponent, CityChartComponent, LegalNoticeComponent, DialogEditProductComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

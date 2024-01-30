@@ -10,6 +10,12 @@
                 <td>{{ product.name }}</td>
                 <td>{{ product.price }}€</td>
                 <td>{{ product.sales }}</td>
+                <button class="product-more"  mat-icon-button [matMenuTriggerFor]="productMenu">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #productMenu="matMenu">
+                    <button mat-menu-item (click)="openEditDialog()">Edit</button>
+                </mat-menu>
             </tr>
         </table>
     </mat-card-content>

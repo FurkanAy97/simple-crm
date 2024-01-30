@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ProductService } from 'src/services/product.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddProductComponent } from '../dialog-add-product/dialog-add-product.component';
+import { DialogEditProductComponent } from '../dialog-edit-product/dialog-edit-product.component';
 
 @Component({
   selector: 'app-products',
@@ -18,6 +19,12 @@ export class ProductsComponent {
   openDialog(): void {
     this.dialog.open(DialogAddProductComponent);
   }
+
+  openEditDialog(): void {
+    this.dialog.open(DialogEditProductComponent);
+  }
+
+  
 
   private async initialize() {
     await this.productService.downloadProducts();

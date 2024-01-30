@@ -59,6 +59,11 @@ mat-card-content{
     bottom: 56px;
 }
 
+.product-more{
+    position: absolute;
+    right: 0;
+}
+
 @media (max-width: 1000px) {
 
     .product-add-btn{

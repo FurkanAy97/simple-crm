@@ -1,0 +1,29 @@
+<h1 mat-dialog-title>Edit User</h1>
+<form [formGroup]="productForm">
+    <div mat-dialog-content class="product-container">
+        <div class="form-product-container">
+            <mat-form-field appearance="outline">
+                <mat-label>Product name</mat-label>
+                <input formControlName="productname" matInput>
+                <mat-error>Please provide a product name.</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Product price</mat-label>
+                <input type="number" formControlName="productprice" matInput>
+                <mat-error>Please provide a product price.</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Product sales</mat-label>
+                <input type="number" formControlName="productprice" matInput>
+                <mat-error>Please provide a product sales.</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div mat-dialog-actions>
+            <button [disabled]="loading" mat-button (click)="dialogRef.close()">Cancel</button>
+            <button [disabled]="loading" mat-button cdkFocusInitial (click)="saveProductEdit()">Save</button>
+        </div>
+    </div>
+</form>
