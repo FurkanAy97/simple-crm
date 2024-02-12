@@ -60,7 +60,6 @@ export class SignUpComponent implements OnInit {
       return 'Please enter a valid email address.';
     }
   
-    // Check if there are any numbers in the input
     if (/\d/.test(control.value)) {
       return 'Numbers are not allowed in this field.';
     }
@@ -71,5 +70,4 @@ export class SignUpComponent implements OnInit {
   togglePasswordVisibility(): void {
     this.hidePassword = !this.hidePassword;
   }
-  
 }

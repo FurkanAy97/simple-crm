@@ -1,4 +1,3 @@
-// Import necessary modules
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
@@ -23,7 +22,6 @@ export class DialogAddProductComponent {
     private snackBar: MatSnackBar,
     private fb: FormBuilder,
   ) {
-    // Create a reactive form
     this.productForm = this.fb.group({
       productname: ['', Validators.required],
       productPrice: [0, [Validators.required, Validators.min(0)]],
@@ -35,12 +33,10 @@ export class DialogAddProductComponent {
     try {
       this.loading = true;
 
-      // Check if the form is valid
       if (this.productForm.invalid) {
         throw new Error('Please fill all required information.');
       }
 
-      // Use form values
       const newProduct = {
         name: this.productForm.value.productname,
         price: this.productForm.value.productPrice,
@@ -48,7 +44,6 @@ export class DialogAddProductComponent {
         sales: this.productForm.value.productSales
       };
 
-      // Validate numbers
       if (!this.isValidNumber(newProduct.price) || !this.isValidNumber(newProduct.sales)) {
         throw new Error('Product price and sales must be positive numbers.');
       }
@@ -58,7 +53,6 @@ export class DialogAddProductComponent {
 
       this.productService.allProducts.push(newProduct);
 
-      // Reset the form fields
       this.productForm.reset();
 
       this.dialogRef.close();

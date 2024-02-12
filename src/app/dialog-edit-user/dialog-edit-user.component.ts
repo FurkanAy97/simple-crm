@@ -10,15 +10,13 @@ import { doc, getFirestore, updateDoc } from 'firebase/firestore';
 })
 export class DialogEditUserComponent implements OnInit {
   loading: boolean = false;
-  user: any = { firstName: '', lastName: '', email: '', birthDate: null }; // Add this line
+  user: any = { firstName: '', lastName: '', email: '', birthDate: null };
   userForm: FormGroup;
   maxBirthDate: Date = new Date();
   userID: any;
   firestore = getFirestore();
 
-  constructor(public dialogRef: MatDialogRef<DialogEditUserComponent>, private fb: FormBuilder) {
-  
-  }
+  constructor(public dialogRef: MatDialogRef<DialogEditUserComponent>, private fb: FormBuilder) {}
 
   ngOnInit() {
     this.initForm();
