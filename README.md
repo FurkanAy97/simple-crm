@@ -1,27 +1,9 @@
-# SimpleCrm
+Simple CRM
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.0.
+Simple CRM is a fictitious lightweight web application concept designed to demonstrate basic customer relationship management functionality. It presents a mock interface where users can explore hypothetical product sales and user data through intuitive charts and graphs. Additionally, it showcases a simulated user-friendly interface for managing mock product and user information.
 
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Features
+Sales Charts: Visualize product sales data through interactive charts, enabling users to track sales performance over time.
+User Charts: View user-related data such as customer demographics or user activity through informative charts.
+Add Products: Easily add new products to the system through a dedicated tab, providing essential details such as product name, price, and description.
+Add Users: Manage user information efficiently by adding new users via a straightforward interface.
